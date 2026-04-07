@@ -20,7 +20,7 @@ modified: '2026-03-16'
 specificationVersion: '0.19'
 apis:
   - aid: hey-api:hey-api
-    name: Hey API openapi-ts
+    name: Hey API Openapi-Ts
     description: >-
       @hey-api/openapi-ts is an OpenAPI to TypeScript codegen tool that
       generates reliable API clients and SDKs from OpenAPI specifications.
