@@ -9,10 +9,10 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Code Generation
-  - TypeScript
-  - OpenAPI
   - Developer Tools
+  - OpenAPI
   - SDKs
+  - TypeScript
 url: >-
   https://raw.githubusercontent.com/api-evangelist/hey-api/refs/heads/main/apis.yml
 created: '2025-05-02'
@@ -28,8 +28,8 @@ apis:
     humanURL: https://heyapi.dev/openapi-ts/get-started
     tags:
       - Code Generation
-      - TypeScript
       - OpenAPI
+      - TypeScript
     properties:
       - type: Documentation
         url: https://heyapi.dev/openapi-ts/get-started
