@@ -16,7 +16,7 @@ Hey API provides @hey-api/openapi-ts, an OpenAPI to TypeScript codegen trusted o
 ## Timestamps
 
 - **Created:** 2025-05-02 
-- **Modified:** 2026-03-16 
+- **Modified:** 2026-04-28 
 
 ## APIs
 
