@@ -33,14 +33,14 @@ apis:
     properties:
       - type: Documentation
         url: https://heyapi.dev/openapi-ts/get-started
-      - type: Getting Started
+      - type: GettingStarted
         url: https://heyapi.dev/openapi-ts/get-started
 common:
   - type: Website
     url: https://heyapi.dev/
   - type: Documentation
     url: https://heyapi.dev/openapi-ts/get-started
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/hey-api
 maintainers:
   - FN: Kin Lane
