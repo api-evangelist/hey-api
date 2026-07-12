@@ -36,6 +36,8 @@ apis:
       - type: GettingStarted
         url: https://heyapi.dev/openapi-ts/get-started
 common:
+  - type: DomainSecurity
+    url: security/hey-api-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/heyapi
   - type: Website
