@@ -1,10 +1,17 @@
 aid: hey-api
 name: Hey API
 description: >-
-  Hey API provides @hey-api/openapi-ts, an OpenAPI to TypeScript codegen
-  trusted over 1,000,000 times each month to generate reliable API clients
-  and SDKs. The code is MIT-licensed and free to use, supporting multiple
-  HTTP clients and customization options.
+  Hey API builds open-source OpenAPI code generators and a hosted specification
+  registry. @hey-api/openapi-ts turns an OpenAPI document into production-grade
+  TypeScript — SDKs, types, Zod/Valibot/TypeBox validators, TanStack Query and
+  SWR hooks, MSW and Playwright test doubles, and Fastify/NestJS/Hono/Express
+  server handlers — across more than twenty plugins and eight HTTP client
+  runtimes, with a sibling Python generator emitting Pydantic models. It draws
+  over four million npm downloads a week and is used by Vercel, PayPal, AWS,
+  Autodesk and OpenCode. The Hey API Platform (api.heyapi.dev) adds a
+  build-attested registry: CI uploads each OpenAPI document with its repository,
+  branch, commit and workflow provenance, and consumers resolve it back by
+  branch, tag, version or exact commit for reproducible client generation.
 type: Index
 accessModel:
   pricing: freemium
@@ -25,39 +32,145 @@ tags:
   - OpenAPI
   - SDKs
   - TypeScript
+  - Python
+  - API Design
+  - Specifications
+  - Registry
+  - Open Source
 url: >-
   https://raw.githubusercontent.com/api-evangelist/hey-api/refs/heads/main/apis.yml
 created: '2025-05-02'
-modified: '2026-04-28'
+modified: '2026-08-06'
 specificationVersion: '0.19'
 apis:
+  - aid: hey-api:hey-api-platform
+    name: Hey API Platform API
+    description: >-
+      The Hey API Platform REST backend. Stores OpenAPI specifications against
+      an organization and project with full CI provenance (repository, branch,
+      commit SHA, workflow, run, actor, tags, version), and serves them back
+      through a filterable download endpoint that every codegen can consume
+      directly. Also covers organization and membership management, project
+      lifecycle, project and personal API keys, and project-scoped webhooks
+      that fire on specification.created and specification.deleted. Thirty-eight
+      operations published as OpenAPI 3.1.1; bearer API key for the registry
+      endpoints, Clerk session JWT for management.
+    humanURL: https://heyapi.dev/docs/openapi/typescript/integrations
+    baseURL: https://api.heyapi.dev
+    tags:
+      - OpenAPI
+      - Registry
+      - Specifications
+      - Webhooks
+      - Developer Tools
+    properties:
+      - type: OpenAPI
+        url: openapi/hey-api-platform-openapi.json
+      - type: Documentation
+        url: https://heyapi.dev/docs/openapi/typescript/integrations
+      - type: APIReference
+        url: https://heyapi.dev/docs/openapi/typescript/integrations
+      - type: Authentication
+        url: authentication/hey-api-authentication.yml
+      - type: Conventions
+        url: conventions/hey-api-conventions.yml
+      - type: ErrorCatalog
+        url: errors/hey-api-problem-types.yml
+      - type: DataModel
+        url: data-model/hey-api-data-model.yml
+      - type: Webhooks
+        url: asyncapi/hey-api-platform-webhooks.yml
+      - type: Overlay
+        url: overlays/hey-api-platform-overlay.yaml
+      - type: Sandbox
+        url: sandbox/hey-api-sandbox.yml
   - aid: hey-api:hey-api
     name: Hey API Openapi-Ts
     description: >-
-      @hey-api/openapi-ts is an OpenAPI to TypeScript codegen tool that
-      generates reliable API clients and SDKs from OpenAPI specifications.
-      It is MIT-licensed and supports over 1,000,000 monthly downloads.
-    humanURL: https://heyapi.dev/openapi-ts/get-started
+      @hey-api/openapi-ts is an OpenAPI to TypeScript code generator that emits
+      production-grade SDKs, types, validators, query hooks, mocks and web
+      framework handlers from any OpenAPI 2.0, 3.0 or 3.1 document. MIT
+      licensed, over four million npm downloads a week, with a companion
+      Python generator producing typed SDKs and Pydantic models. Consumed as a
+      CLI, a Node API, a Vite plugin or a Nuxt module.
+    humanURL: https://heyapi.dev/docs/openapi/typescript/get-started
     tags:
       - Code Generation
       - OpenAPI
       - TypeScript
+      - Python
+      - SDKs
     properties:
       - type: Documentation
         url: https://heyapi.dev/openapi-ts/get-started
       - type: GettingStarted
         url: https://heyapi.dev/openapi-ts/get-started
+      - type: CLI
+        url: cli/hey-api-cli.yml
+      - type: SDKs
+        url: packages/hey-api-packages.yml
+      - type: SourceCode
+        url: https://github.com/hey-api/hey-api
 common:
-  - type: DomainSecurity
-    url: security/hey-api-domain-security.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/heyapi
+  - type: AgenticAccess
+    url: agentic-access/hey-api-agentic-access.yml
   - type: Website
     url: https://heyapi.dev/
+  - type: DeveloperPortal
+    url: https://heyapi.dev/docs
   - type: Documentation
     url: https://heyapi.dev/openapi-ts/get-started
+  - type: APIReference
+    url: https://heyapi.dev/docs/openapi/typescript/integrations
+  - type: GettingStarted
+    url: https://heyapi.dev/docs/openapi/typescript/get-started
+  - type: SignUp
+    url: https://app.heyapi.dev
+  - type: Support
+    url: https://github.com/orgs/hey-api/discussions
   - type: GitHubOrganization
     url: https://github.com/hey-api
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/heyapi
+  - type: ChangeLog
+    url: changelog/hey-api-changelog.yml
+  - type: Deprecation
+    url: https://heyapi.dev/docs/openapi/typescript/migrating
+  - type: Lifecycle
+    url: lifecycle/hey-api-lifecycle.yml
+  - type: Packages
+    url: packages/hey-api-packages.yml
+  - type: SDKs
+    url: packages/hey-api-packages.yml
+  - type: CLI
+    url: cli/hey-api-cli.yml
+  - type: Sandbox
+    url: sandbox/hey-api-sandbox.yml
+  - type: Authentication
+    url: authentication/hey-api-authentication.yml
+  - type: Conventions
+    url: conventions/hey-api-conventions.yml
+  - type: ErrorCatalog
+    url: errors/hey-api-problem-types.yml
+  - type: DataModel
+    url: data-model/hey-api-data-model.yml
+  - type: Webhooks
+    url: asyncapi/hey-api-platform-webhooks.yml
+  - type: Conformance
+    url: conformance/hey-api-conformance.yml
+  - type: DomainSecurity
+    url: security/hey-api-domain-security.yml
+  - type: LLMsTxt
+    url: llms/hey-api-llms.txt
+  - type: ContentSignal
+    url: well-known/hey-api-robots.txt
+  - type: AgentSkill
+    url: skills/_index.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-06'
+  status: enriched
+  artifacts_added: 21
+  pass: local-v1
