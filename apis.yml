@@ -43,75 +43,199 @@ created: '2025-05-02'
 modified: '2026-08-06'
 specificationVersion: '0.19'
 apis:
-  - aid: hey-api:hey-api-platform
-    name: Hey API Platform API
-    description: >-
-      The Hey API Platform REST backend. Stores OpenAPI specifications against
-      an organization and project with full CI provenance (repository, branch,
-      commit SHA, workflow, run, actor, tags, version), and serves them back
-      through a filterable download endpoint that every codegen can consume
-      directly. Also covers organization and membership management, project
-      lifecycle, project and personal API keys, and project-scoped webhooks
-      that fire on specification.created and specification.deleted. Thirty-eight
-      operations published as OpenAPI 3.1.1; bearer API key for the registry
-      endpoints, Clerk session JWT for management.
-    humanURL: https://heyapi.dev/docs/openapi/typescript/integrations
-    baseURL: https://api.heyapi.dev
-    tags:
-      - OpenAPI
-      - Registry
-      - Specifications
-      - Webhooks
-      - Developer Tools
-    properties:
-      - type: OpenAPI
-        url: openapi/hey-api-platform-openapi.json
-      - type: Documentation
-        url: https://heyapi.dev/docs/openapi/typescript/integrations
-      - type: APIReference
-        url: https://heyapi.dev/docs/openapi/typescript/integrations
-      - type: Authentication
-        url: authentication/hey-api-authentication.yml
-      - type: Conventions
-        url: conventions/hey-api-conventions.yml
-      - type: ErrorCatalog
-        url: errors/hey-api-problem-types.yml
-      - type: DataModel
-        url: data-model/hey-api-data-model.yml
-      - type: Webhooks
-        url: asyncapi/hey-api-platform-webhooks.yml
-      - type: Overlay
-        url: overlays/hey-api-platform-overlay.yaml
-      - type: Sandbox
-        url: sandbox/hey-api-sandbox.yml
-  - aid: hey-api:hey-api
-    name: Hey API Openapi-Ts
-    description: >-
-      @hey-api/openapi-ts is an OpenAPI to TypeScript code generator that emits
-      production-grade SDKs, types, validators, query hooks, mocks and web
-      framework handlers from any OpenAPI 2.0, 3.0 or 3.1 document. MIT
-      licensed, over four million npm downloads a week, with a companion
-      Python generator producing typed SDKs and Pydantic models. Consumed as a
-      CLI, a Node API, a Vite plugin or a Nuxt module.
-    humanURL: https://heyapi.dev/docs/openapi/typescript/get-started
-    tags:
-      - Code Generation
-      - OpenAPI
-      - TypeScript
-      - Python
-      - SDKs
-    properties:
-      - type: Documentation
-        url: https://heyapi.dev/openapi-ts/get-started
-      - type: GettingStarted
-        url: https://heyapi.dev/openapi-ts/get-started
-      - type: CLI
-        url: cli/hey-api-cli.yml
-      - type: SDKs
-        url: packages/hey-api-packages.yml
-      - type: SourceCode
-        url: https://github.com/hey-api/hey-api
+- aid: hey-api:hey-api
+  name: Hey API Openapi-Ts
+  description: >-
+    @hey-api/openapi-ts is an OpenAPI to TypeScript code generator that emits production-grade SDKs, types,
+    validators, query hooks, mocks and web framework handlers from any OpenAPI 2.0, 3.0 or 3.1 document.
+    MIT licensed, over four million npm downloads a week, with a companion Python generator producing
+    typed SDKs and Pydantic models. Consumed as a CLI, a Node API, a Vite plugin or a Nuxt module.
+  humanURL: https://heyapi.dev/docs/openapi/typescript/get-started
+  tags:
+  - Code Generation
+  - OpenAPI
+  - TypeScript
+  - Python
+  - SDKs
+  properties:
+  - type: Documentation
+    url: https://heyapi.dev/openapi-ts/get-started
+  - type: GettingStarted
+    url: https://heyapi.dev/openapi-ts/get-started
+  - type: CLI
+    url: cli/hey-api-cli.yml
+  - type: SDKs
+    url: packages/hey-api-packages.yml
+  - type: SourceCode
+    url: https://github.com/hey-api/hey-api
+- aid: hey-api:hey-api-get-api
+  name: Hey API Get API
+  description: The Get API from Hey API — 1 operation(s) for get.
+  humanURL: https://heyapi.dev/docs/openapi/typescript/integrations
+  baseURL: https://api.heyapi.dev
+  tags:
+  - Get
+  properties:
+  - type: OpenAPI
+    url: openapi/hey-api-get-api-openapi.yml
+  - type: Documentation
+    url: https://heyapi.dev/docs/openapi/typescript/integrations
+  - type: APIReference
+    url: https://heyapi.dev/docs/openapi/typescript/integrations
+  - type: Authentication
+    url: authentication/hey-api-authentication.yml
+  - type: Conventions
+    url: conventions/hey-api-conventions.yml
+  - type: ErrorCatalog
+    url: errors/hey-api-problem-types.yml
+  - type: DataModel
+    url: data-model/hey-api-data-model.yml
+  - type: Webhooks
+    url: asyncapi/hey-api-platform-webhooks.yml
+  - type: Sandbox
+    url: sandbox/hey-api-sandbox.yml
+- aid: hey-api:hey-api-hey-api-api
+  name: Hey API Hey API API
+  description: The Hey API API from Hey API — 1 operation(s) for hey api.
+  humanURL: https://heyapi.dev/docs/openapi/typescript/integrations
+  baseURL: https://api.heyapi.dev
+  tags:
+  - Hey API
+  properties:
+  - type: OpenAPI
+    url: openapi/hey-api-hey-api-api-openapi.yml
+  - type: Documentation
+    url: https://heyapi.dev/docs/openapi/typescript/integrations
+  - type: APIReference
+    url: https://heyapi.dev/docs/openapi/typescript/integrations
+  - type: Authentication
+    url: authentication/hey-api-authentication.yml
+  - type: Conventions
+    url: conventions/hey-api-conventions.yml
+  - type: ErrorCatalog
+    url: errors/hey-api-problem-types.yml
+  - type: DataModel
+    url: data-model/hey-api-data-model.yml
+  - type: Webhooks
+    url: asyncapi/hey-api-platform-webhooks.yml
+  - type: Sandbox
+    url: sandbox/hey-api-sandbox.yml
+- aid: hey-api:hey-api-internal-api
+  name: Hey API Internal API
+  description: The Internal API from Hey API — 3 operation(s) for internal.
+  humanURL: https://heyapi.dev/docs/openapi/typescript/integrations
+  baseURL: https://api.heyapi.dev
+  tags:
+  - Internal
+  properties:
+  - type: OpenAPI
+    url: openapi/hey-api-internal-api-openapi.yml
+  - type: Documentation
+    url: https://heyapi.dev/docs/openapi/typescript/integrations
+  - type: APIReference
+    url: https://heyapi.dev/docs/openapi/typescript/integrations
+  - type: Authentication
+    url: authentication/hey-api-authentication.yml
+  - type: Conventions
+    url: conventions/hey-api-conventions.yml
+  - type: ErrorCatalog
+    url: errors/hey-api-problem-types.yml
+  - type: DataModel
+    url: data-model/hey-api-data-model.yml
+  - type: Webhooks
+    url: asyncapi/hey-api-platform-webhooks.yml
+  - type: Sandbox
+    url: sandbox/hey-api-sandbox.yml
+- aid: hey-api:hey-api-organizations-api
+  name: Hey API Organizations API
+  description: The Organizations API from Hey API — 13 operation(s) for organizations.
+  humanURL: https://heyapi.dev/docs/openapi/typescript/integrations
+  baseURL: https://api.heyapi.dev
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/hey-api-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://heyapi.dev/docs/openapi/typescript/integrations
+  - type: APIReference
+    url: https://heyapi.dev/docs/openapi/typescript/integrations
+  - type: Authentication
+    url: authentication/hey-api-authentication.yml
+  - type: Conventions
+    url: conventions/hey-api-conventions.yml
+  - type: ErrorCatalog
+    url: errors/hey-api-problem-types.yml
+  - type: DataModel
+    url: data-model/hey-api-data-model.yml
+  - type: Webhooks
+    url: asyncapi/hey-api-platform-webhooks.yml
+  - type: Sandbox
+    url: sandbox/hey-api-sandbox.yml
+- aid: hey-api:hey-api-specifications-api
+  name: Hey API Specifications API
+  description: The Specifications API from Hey API — 1 operation(s) for specifications.
+  humanURL: https://heyapi.dev/docs/openapi/typescript/integrations
+  baseURL: https://api.heyapi.dev
+  tags:
+  - Specifications
+  properties:
+  - type: OpenAPI
+    url: openapi/hey-api-specifications-api-openapi.yml
+  - type: Documentation
+    url: https://heyapi.dev/docs/openapi/typescript/integrations
+  - type: APIReference
+    url: https://heyapi.dev/docs/openapi/typescript/integrations
+  - type: Authentication
+    url: authentication/hey-api-authentication.yml
+  - type: Conventions
+    url: conventions/hey-api-conventions.yml
+  - type: ErrorCatalog
+    url: errors/hey-api-problem-types.yml
+  - type: DataModel
+    url: data-model/hey-api-data-model.yml
+  - type: Webhooks
+    url: asyncapi/hey-api-platform-webhooks.yml
+  - type: Sandbox
+    url: sandbox/hey-api-sandbox.yml
+- aid: hey-api:hey-api-users-api
+  name: Hey API Users API
+  description: The Users API from Hey API — 6 operation(s) for users.
+  humanURL: https://heyapi.dev/docs/openapi/typescript/integrations
+  baseURL: https://api.heyapi.dev
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/hey-api-users-api-openapi.yml
+  - type: Documentation
+    url: https://heyapi.dev/docs/openapi/typescript/integrations
+  - type: APIReference
+    url: https://heyapi.dev/docs/openapi/typescript/integrations
+  - type: Authentication
+    url: authentication/hey-api-authentication.yml
+  - type: Conventions
+    url: conventions/hey-api-conventions.yml
+  - type: ErrorCatalog
+    url: errors/hey-api-problem-types.yml
+  - type: DataModel
+    url: data-model/hey-api-data-model.yml
+  - type: Webhooks
+    url: asyncapi/hey-api-platform-webhooks.yml
+  - type: Sandbox
+    url: sandbox/hey-api-sandbox.yml
 common:
+  - type: Overlay
+    url: overlays/hey-api-platform-overlay.yaml
+  - type: IssueTracker
+    url: https://github.com/hey-api/hey-api/issues
+  - type: Releases
+    url: https://github.com/hey-api/hey-api/releases
+  - type: CodeOfConduct
+    url: https://github.com/hey-api/hey-api/blob/main/CODE_OF_CONDUCT.md
+  - type: License
+    name: MIT
+    url: https://github.com/hey-api/hey-api/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/hey-api-agentic-access.yml
   - type: Website
