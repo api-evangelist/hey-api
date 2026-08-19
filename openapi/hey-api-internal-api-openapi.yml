@@ -1,0 +1,613 @@
+openapi: 3.2.0
+info:
+  description: Hey API REST backend
+  title: Hey Internal API
+  version: 1.0.0
+tags:
+- name: Internal
+paths:
+  /v1/internal/sync-users:
+    post:
+      security:
+      - Clerk: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  numAffectedRows:
+                    type: string
+                    pattern: ^d+$
+                    example: '1'
+                required:
+                - numAffectedRows
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+      tags:
+      - Internal
+  /v1/internal/webhooks/clerk:
+    post:
+      security:
+      - Clerk: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      created_at:
+                        type: number
+                      email_addresses:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            created_at:
+                              type: number
+                            email_address:
+                              type: string
+                            id:
+                              type: string
+                            linked_to:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  type:
+                                    type: string
+                                required:
+                                - id
+                                - type
+                            updated_at:
+                              type: number
+                            verification:
+                              type: object
+                              properties:
+                                attempts:
+                                  type:
+                                  - number
+                                  - 'null'
+                                expire_at:
+                                  type:
+                                  - number
+                                  - 'null'
+                                status:
+                                  type: string
+                                strategy:
+                                  type: string
+                              required:
+                              - attempts
+                              - expire_at
+                              - status
+                              - strategy
+                          required:
+                          - created_at
+                          - email_address
+                          - id
+                          - linked_to
+                          - updated_at
+                          - verification
+                      first_name:
+                        type:
+                        - string
+                        - 'null'
+                      has_image:
+                        type: boolean
+                      id:
+                        type: string
+                        example: user_2tDpMYgevIkZOL76Wo6VzXxsbxD
+                      image_url:
+                        type:
+                        - string
+                        - 'null'
+                      last_active_at:
+                        type:
+                        - number
+                        - 'null'
+                      last_name:
+                        type:
+                        - string
+                        - 'null'
+                      last_sign_in_at:
+                        type:
+                        - number
+                        - 'null'
+                      mfa_disabled_at:
+                        type:
+                        - number
+                        - 'null'
+                      mfa_enabled_at:
+                        type:
+                        - number
+                        - 'null'
+                      passkeys:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                      password_enabled:
+                        type: boolean
+                      phone_numbers:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                      primary_email_address_id:
+                        type:
+                        - string
+                        - 'null'
+                      primary_phone_number_id:
+                        type:
+                        - string
+                        - 'null'
+                      profile_image_url:
+                        type:
+                        - string
+                        - 'null'
+                      two_factor_enabled:
+                        type: boolean
+                      updated_at:
+                        type: number
+                      username:
+                        type:
+                        - string
+                        - 'null'
+                    required:
+                    - created_at
+                    - email_addresses
+                    - first_name
+                    - has_image
+                    - id
+                    - image_url
+                    - last_active_at
+                    - last_name
+                    - last_sign_in_at
+                    - mfa_disabled_at
+                    - mfa_enabled_at
+                    - passkeys
+                    - password_enabled
+                    - phone_numbers
+                    - primary_email_address_id
+                    - primary_phone_number_id
+                    - profile_image_url
+                    - two_factor_enabled
+                    - updated_at
+                    - username
+                  type:
+                    type: string
+                    enum:
+                    - user.created
+                    - user.updated
+                required:
+                - data
+                - type
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      deleted:
+                        type: boolean
+                      id:
+                        type: string
+                        example: user_2tDpMYgevIkZOL76Wo6VzXxsbxD
+                    required:
+                    - deleted
+                    - id
+                  type:
+                    type: string
+                    enum:
+                    - user.deleted
+                required:
+                - data
+                - type
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: org_2tXIkBfPSwS6wkcyABwOQ0hpafD
+                    required:
+                    - id
+                  type:
+                    type: string
+                    enum:
+                    - organization.created
+                    - organization.updated
+                required:
+                - data
+                - type
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: org_2tXIkBfPSwS6wkcyABwOQ0hpafD
+                    required:
+                    - id
+                  type:
+                    type: string
+                    enum:
+                    - organization.deleted
+                required:
+                - data
+                - type
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: orgmem_2tXIk9zQFCokdnEaHZruFDjCT10
+                    required:
+                    - id
+                  type:
+                    type: string
+                    enum:
+                    - organizationMembership.created
+                    - organizationMembership.updated
+                required:
+                - data
+                - type
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: orgmem_2tXIk9zQFCokdnEaHZruFDjCT10
+                    required:
+                    - id
+                  type:
+                    type: string
+                    enum:
+                    - organizationMembership.deleted
+                required:
+                - data
+                - type
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  type:
+                    type: string
+                    enum:
+                    - role.created
+                    - role.updated
+                required:
+                - data
+                - type
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  type:
+                    type: string
+                    enum:
+                    - role.deleted
+                required:
+                - data
+                - type
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: OK
+                required:
+                - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+      tags:
+      - Internal
+  /v1/internal/webhooks/hey-api:
+    post:
+      security:
+      - Clerk: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Specification'
+                id:
+                  type: string
+                  format: uuid
+                  example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+                object:
+                  type: string
+                  enum:
+                  - event
+                timestamp:
+                  type: number
+                type:
+                  type: string
+                  enum:
+                  - specification.created
+                  - specification.deleted
+              required:
+              - data
+              - id
+              - object
+              - timestamp
+              - type
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: OK
+                required:
+                - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+      tags:
+      - Internal
+components:
+  schemas:
+    Specification:
+      type: object
+      properties:
+        api_key_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        actor:
+          type:
+          - string
+          - 'null'
+          example: mrlubos
+        actor_id:
+          type:
+          - string
+          - 'null'
+          example: '12529395'
+        branch:
+          type:
+          - string
+          - 'null'
+          example: feat/awesome-feature
+        branch_base:
+          type:
+          - string
+          - 'null'
+          example: main
+        ci_platform:
+          type:
+          - string
+          - 'null'
+          example: github
+        commit_sha:
+          type:
+          - string
+          - 'null'
+          example: 1c6945d83eab3580791eb4148562b3bd2e16df14
+        creator_user_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        event_name:
+          type:
+          - string
+          - 'null'
+          example: push
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        job:
+          type:
+          - string
+          - 'null'
+          example: ci
+        project_id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        ref:
+          type:
+          - string
+          - 'null'
+          example: refs/heads/main
+        ref_type:
+          type:
+          - string
+          - 'null'
+          example: branch
+        repository:
+          type:
+          - string
+          - 'null'
+          example: hey-api/platform
+        run_id:
+          type:
+          - string
+          - 'null'
+          example: '13448896305'
+        run_number:
+          type:
+          - string
+          - 'null'
+          example: '1'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        tags:
+          type: array
+          items:
+            type: string
+          example:
+          - dev
+        version:
+          type:
+          - string
+          - 'null'
+          example: 1.0.0
+        workflow:
+          type:
+          - string
+          - 'null'
+          example: CI
+      required:
+      - api_key_id
+      - actor
+      - actor_id
+      - branch
+      - branch_base
+      - ci_platform
+      - commit_sha
+      - creator_user_id
+      - created_at
+      - event_name
+      - id
+      - job
+      - project_id
+      - ref
+      - ref_type
+      - repository
+      - run_id
+      - run_number
+      - updated_at
+      - tags
+      - version
+      - workflow
+  securitySchemes:
+    ApiKey:
+      description: API key
+      scheme: bearer
+      type: http
+    Clerk:
+      bearerFormat: JWT
+      description: Clerk JWT token
+      scheme: bearer
+      type: http

@@ -1,0 +1,171 @@
+generated: '2026-08-06'
+method: searched
+source: >-
+  npm registry (registry.npmjs.org) + PyPI (pypi.org) + the Hey API docs
+  installation pages. Every entry below was resolved live against the registry
+  on 2026-08-06; versions are the `latest` dist-tag at that time.
+notes: >-
+  Hey API ships CODE GENERATORS and generated-client runtimes, not a hosted-API
+  SDK family. `@hey-api/openapi-ts` is the flagship (4,088,177 downloads in the
+  week ending 2026-08-05, per api.npmjs.org). The `client-*` packages are the
+  runtime HTTP clients the generated SDKs import. All first-party packages are
+  MIT licensed and published under the `@hey-api` npm scope.
+packages:
+  - language: typescript
+    registry: npm
+    name: '@hey-api/openapi-ts'
+    version: 0.99.0
+    url: https://www.npmjs.com/package/@hey-api/openapi-ts
+    install: npm install @hey-api/openapi-ts -D -E
+    license: MIT
+    official: true
+    role: codegen
+    description: OpenAPI to TypeScript code generator — SDKs, Zod schemas, TanStack Query hooks, 20+ plugins.
+  - language: python
+    registry: pypi
+    name: hey-api
+    version: 0.0.24
+    url: https://pypi.org/project/hey-api/
+    install: pip install hey-api
+    official: true
+    role: codegen
+    description: OpenAPI to Python code generator — production-grade SDKs and Pydantic models.
+    evidence: 'PyPI author metadata: Hey API <lubos@heyapi.dev>; Repository https://github.com/hey-api/hey-api'
+  - language: typescript
+    registry: npm
+    name: '@hey-api/openapi-python'
+    version: 0.0.24
+    url: https://www.npmjs.com/package/@hey-api/openapi-python
+    install: npm install @hey-api/openapi-python -D -E
+    license: MIT
+    official: true
+    role: codegen
+    description: npm distribution of the OpenAPI to Python code generator.
+  - language: typescript
+    registry: npm
+    name: '@hey-api/client-fetch'
+    version: 0.13.1
+    url: https://www.npmjs.com/package/@hey-api/client-fetch
+    install: npm install @hey-api/client-fetch
+    license: MIT
+    official: true
+    role: client-runtime
+    description: Fetch API client runtime for generated SDKs.
+  - language: typescript
+    registry: npm
+    name: '@hey-api/client-axios'
+    version: 0.9.1
+    url: https://www.npmjs.com/package/@hey-api/client-axios
+    install: npm install @hey-api/client-axios
+    license: MIT
+    official: true
+    role: client-runtime
+    description: Axios client runtime for generated SDKs.
+  - language: typescript
+    registry: npm
+    name: '@hey-api/client-next'
+    version: 0.5.1
+    url: https://www.npmjs.com/package/@hey-api/client-next
+    install: npm install @hey-api/client-next
+    license: MIT
+    official: true
+    role: client-runtime
+    description: Next.js client runtime for generated SDKs.
+  - language: typescript
+    registry: npm
+    name: '@hey-api/client-nuxt'
+    version: 0.4.2
+    url: https://www.npmjs.com/package/@hey-api/client-nuxt
+    install: npm install @hey-api/client-nuxt
+    license: MIT
+    official: true
+    role: client-runtime
+    description: Nuxt client runtime for generated SDKs.
+  - language: typescript
+    registry: npm
+    name: '@hey-api/vite-plugin'
+    version: 0.3.2
+    url: https://www.npmjs.com/package/@hey-api/vite-plugin
+    install: npm install @hey-api/vite-plugin -D -E
+    license: MIT
+    official: true
+    role: build-integration
+    description: Vite 5/6/7/8 plugin that runs the codegen inside the build pipeline.
+  - language: typescript
+    registry: npm
+    name: '@hey-api/nuxt'
+    version: 0.2.1
+    url: https://www.npmjs.com/package/@hey-api/nuxt
+    install: npm install @hey-api/nuxt -D -E
+    license: MIT
+    official: true
+    role: build-integration
+    description: Nuxt module that runs the codegen inside the build pipeline.
+  - language: typescript
+    registry: npm
+    name: '@hey-api/codegen-core'
+    version: 0.9.1
+    url: https://www.npmjs.com/package/@hey-api/codegen-core
+    license: MIT
+    official: true
+    role: framework
+    description: TypeScript framework for generating files (shared codegen core).
+  - language: typescript
+    registry: npm
+    name: '@hey-api/codegen-cli'
+    version: 0.0.1
+    url: https://www.npmjs.com/package/@hey-api/codegen-cli
+    license: MIT
+    official: true
+    role: framework
+    description: Shared CLI framework for Hey API code generators.
+  - language: typescript
+    registry: npm
+    name: '@hey-api/spec-types'
+    version: 0.2.0
+    url: https://www.npmjs.com/package/@hey-api/spec-types
+    license: MIT
+    official: true
+    role: types
+    description: TypeScript definitions for OpenAPI and JSON Schema specifications.
+  - language: typescript
+    registry: npm
+    name: '@hey-api/json-schema-ref-parser'
+    version: 1.4.4
+    url: https://www.npmjs.com/package/@hey-api/json-schema-ref-parser
+    license: MIT
+    official: true
+    role: library
+    description: Parse, resolve and dereference JSON Schema $ref pointers (Hey API fork).
+  - language: typescript
+    registry: npm
+    name: '@hey-api/starlight-llms-txt'
+    version: 0.10.2
+    url: https://www.npmjs.com/package/@hey-api/starlight-llms-txt
+    license: MIT
+    official: true
+    role: docs-tooling
+    description: Generates llms.txt from a Starlight documentation site — what produces heyapi.dev/llms.txt.
+ci_integrations:
+  - name: hey-api/upload-openapi-spec
+    kind: github-action
+    url: https://github.com/marketplace/actions/upload-openapi-spec-by-hey-api
+    repo: https://github.com/hey-api/upload-openapi-spec
+    version: v1.3.0
+    official: true
+    description: >-
+      GitHub Action that POSTs an OpenAPI document to the Hey API Platform
+      (POST https://api.heyapi.dev/v1/specifications) on every CI build.
+not_first_party:
+  - registry: pypi
+    name: openapi-python
+    url: https://pypi.org/project/openapi-python/
+    reason: >-
+      Same-sounding name but PyPI author metadata is "Anders Brams
+      <anders@brams.dk>" — unrelated to Hey API. Excluded deliberately.
+x-evidence:
+  fetched: '2026-08-06'
+  npm_search: https://registry.npmjs.org/-/v1/search?text=%40hey-api&size=100
+  npm_downloads: https://api.npmjs.org/downloads/point/last-week/@hey-api/openapi-ts
+  npm_downloads_last_week: 4088177
+  http_status: 200

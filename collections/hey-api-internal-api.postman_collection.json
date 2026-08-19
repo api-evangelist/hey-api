@@ -1,0 +1,492 @@
+{
+  "item": [
+    {
+      "id": "b1145c90-eac9-4a49-98b1-7b3862a22eee",
+      "name": "Internal",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d2acba17-ce3a-450a-9f4d-b5c01f1253cd",
+          "name": "/v1/internal/sync-users",
+          "request": {
+            "name": "/v1/internal/sync-users",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "internal",
+                "sync-users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9a78d885-9187-43b9-9cce-d0fdbb89915a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "internal",
+                    "sync-users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numAffectedRows\": \"ddddddd\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8f922c4-64b7-4892-b534-59f980068c71",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "internal",
+                    "sync-users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Unauthorized\",\n    \"request_id\": \"req_1234567890\",\n    \"status\": 400,\n    \"timestamp\": \"2025-02-21T02:37:15.840Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05df11f3-c2f6-4a7e-9b4b-bba42b0a81ad",
+          "name": "/v1/internal/webhooks/clerk",
+          "request": {
+            "name": "/v1/internal/webhooks/clerk",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "internal",
+                "webhooks",
+                "clerk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"created_at\": \"<number>\",\n    \"email_addresses\": [\n      {\n        \"created_at\": \"<number>\",\n        \"email_address\": \"<string>\",\n        \"id\": \"<string>\",\n        \"linked_to\": [\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"updated_at\": \"<number>\",\n        \"verification\": {\n          \"attempts\": \"<number,null>\",\n          \"expire_at\": \"<number,null>\",\n          \"status\": \"<string>\",\n          \"strategy\": \"<string>\"\n        }\n      },\n      {\n        \"created_at\": \"<number>\",\n        \"email_address\": \"<string>\",\n        \"id\": \"<string>\",\n        \"linked_to\": [\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"updated_at\": \"<number>\",\n        \"verification\": {\n          \"attempts\": \"<number,null>\",\n          \"expire_at\": \"<number,null>\",\n          \"status\": \"<string>\",\n          \"strategy\": \"<string>\"\n        }\n      }\n    ],\n    \"first_name\": \"<string,null>\",\n    \"has_image\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"image_url\": \"<string,null>\",\n    \"last_active_at\": \"<number,null>\",\n    \"last_name\": \"<string,null>\",\n    \"last_sign_in_at\": \"<number,null>\",\n    \"mfa_disabled_at\": \"<number,null>\",\n    \"mfa_enabled_at\": \"<number,null>\",\n    \"password_enabled\": \"<boolean>\",\n    \"primary_email_address_id\": \"<string,null>\",\n    \"primary_phone_number_id\": \"<string,null>\",\n    \"profile_image_url\": \"<string,null>\",\n    \"two_factor_enabled\": \"<boolean>\",\n    \"updated_at\": \"<number>\",\n    \"username\": \"<string,null>\"\n  },\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "84b0e25b-6fe1-462a-93f2-624c3a3543d3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "internal",
+                    "webhooks",
+                    "clerk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"created_at\": \"<number>\",\n    \"email_addresses\": [\n      {\n        \"created_at\": \"<number>\",\n        \"email_address\": \"<string>\",\n        \"id\": \"<string>\",\n        \"linked_to\": [\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"updated_at\": \"<number>\",\n        \"verification\": {\n          \"attempts\": \"<number,null>\",\n          \"expire_at\": \"<number,null>\",\n          \"status\": \"<string>\",\n          \"strategy\": \"<string>\"\n        }\n      },\n      {\n        \"created_at\": \"<number>\",\n        \"email_address\": \"<string>\",\n        \"id\": \"<string>\",\n        \"linked_to\": [\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"updated_at\": \"<number>\",\n        \"verification\": {\n          \"attempts\": \"<number,null>\",\n          \"expire_at\": \"<number,null>\",\n          \"status\": \"<string>\",\n          \"strategy\": \"<string>\"\n        }\n      }\n    ],\n    \"first_name\": \"<string,null>\",\n    \"has_image\": \"<boolean>\",\n    \"id\": \"user_2tDpMYgevIkZOL76Wo6VzXxsbxD\",\n    \"image_url\": \"<string,null>\",\n    \"last_active_at\": \"<number,null>\",\n    \"last_name\": \"<string,null>\",\n    \"last_sign_in_at\": \"<number,null>\",\n    \"mfa_disabled_at\": \"<number,null>\",\n    \"mfa_enabled_at\": \"<number,null>\",\n    \"password_enabled\": \"<boolean>\",\n    \"primary_email_address_id\": \"<string,null>\",\n    \"primary_phone_number_id\": \"<string,null>\",\n    \"profile_image_url\": \"<string,null>\",\n    \"two_factor_enabled\": \"<boolean>\",\n    \"updated_at\": \"<number>\",\n    \"username\": \"<string,null>\"\n  },\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"OK\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45d66581-f98e-4e0d-8343-63437bbad2b9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "internal",
+                    "webhooks",
+                    "clerk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"created_at\": \"<number>\",\n    \"email_addresses\": [\n      {\n        \"created_at\": \"<number>\",\n        \"email_address\": \"<string>\",\n        \"id\": \"<string>\",\n        \"linked_to\": [\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"updated_at\": \"<number>\",\n        \"verification\": {\n          \"attempts\": \"<number,null>\",\n          \"expire_at\": \"<number,null>\",\n          \"status\": \"<string>\",\n          \"strategy\": \"<string>\"\n        }\n      },\n      {\n        \"created_at\": \"<number>\",\n        \"email_address\": \"<string>\",\n        \"id\": \"<string>\",\n        \"linked_to\": [\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"updated_at\": \"<number>\",\n        \"verification\": {\n          \"attempts\": \"<number,null>\",\n          \"expire_at\": \"<number,null>\",\n          \"status\": \"<string>\",\n          \"strategy\": \"<string>\"\n        }\n      }\n    ],\n    \"first_name\": \"<string,null>\",\n    \"has_image\": \"<boolean>\",\n    \"id\": \"user_2tDpMYgevIkZOL76Wo6VzXxsbxD\",\n    \"image_url\": \"<string,null>\",\n    \"last_active_at\": \"<number,null>\",\n    \"last_name\": \"<string,null>\",\n    \"last_sign_in_at\": \"<number,null>\",\n    \"mfa_disabled_at\": \"<number,null>\",\n    \"mfa_enabled_at\": \"<number,null>\",\n    \"password_enabled\": \"<boolean>\",\n    \"primary_email_address_id\": \"<string,null>\",\n    \"primary_phone_number_id\": \"<string,null>\",\n    \"profile_image_url\": \"<string,null>\",\n    \"two_factor_enabled\": \"<boolean>\",\n    \"updated_at\": \"<number>\",\n    \"username\": \"<string,null>\"\n  },\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Unauthorized\",\n    \"request_id\": \"req_1234567890\",\n    \"status\": 400,\n    \"timestamp\": \"2025-02-21T02:37:15.840Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ebdff58-5b3e-4c27-8638-194a5bf9c68b",
+          "name": "/v1/internal/webhooks/hey-api",
+          "request": {
+            "name": "/v1/internal/webhooks/hey-api",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "internal",
+                "webhooks",
+                "hey-api"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"api_key_id\": \"<string,null-uuid>\",\n    \"actor\": \"<string,null>\",\n    \"actor_id\": \"<string,null>\",\n    \"branch\": \"<string,null>\",\n    \"branch_base\": \"<string,null>\",\n    \"ci_platform\": \"<string,null>\",\n    \"commit_sha\": \"<string,null>\",\n    \"creator_user_id\": \"<string,null-uuid>\",\n    \"created_at\": \"<dateTime>\",\n    \"event_name\": \"<string,null>\",\n    \"id\": \"<uuid>\",\n    \"job\": \"<string,null>\",\n    \"project_id\": \"<uuid>\",\n    \"ref\": \"<string,null>\",\n    \"ref_type\": \"<string,null>\",\n    \"repository\": \"<string,null>\",\n    \"run_id\": \"<string,null>\",\n    \"run_number\": \"<string,null>\",\n    \"updated_at\": \"<dateTime>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"version\": \"<string,null>\",\n    \"workflow\": \"<string,null>\"\n  },\n  \"id\": \"<uuid>\",\n  \"object\": \"<string>\",\n  \"timestamp\": \"<number>\",\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "18529634-c2d3-4cd0-a3b6-1601fcdc1e80",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "internal",
+                    "webhooks",
+                    "hey-api"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"api_key_id\": \"e4ce4324-1177-47ca-aeef-b1d011bd3932\",\n    \"actor\": \"mrlubos\",\n    \"actor_id\": \"12529395\",\n    \"branch\": \"feat/awesome-feature\",\n    \"branch_base\": \"main\",\n    \"ci_platform\": \"github\",\n    \"commit_sha\": \"1c6945d83eab3580791eb4148562b3bd2e16df14\",\n    \"creator_user_id\": \"5d2827a4-b3fc-4946-bb3b-72f23e89c6aa\",\n    \"created_at\": \"2025-02-21T02:37:15.840Z\",\n    \"event_name\": \"push\",\n    \"id\": \"e4ce4324-1177-47ca-aeef-b1d011bd3932\",\n    \"job\": \"ci\",\n    \"project_id\": \"e4ce4324-1177-47ca-aeef-b1d011bd3932\",\n    \"ref\": \"refs/heads/main\",\n    \"ref_type\": \"branch\",\n    \"repository\": \"hey-api/platform\",\n    \"run_id\": \"13448896305\",\n    \"run_number\": \"1\",\n    \"updated_at\": \"2025-02-21T02:37:15.840Z\",\n    \"tags\": [\n      \"dev\"\n    ],\n    \"version\": \"1.0.0\",\n    \"workflow\": \"CI\"\n  },\n  \"id\": \"e4ce4324-1177-47ca-aeef-b1d011bd3932\",\n  \"object\": \"<string>\",\n  \"timestamp\": \"<number>\",\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"OK\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df067e1e-9c58-4af7-b251-c730f888e32f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "internal",
+                    "webhooks",
+                    "hey-api"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"api_key_id\": \"e4ce4324-1177-47ca-aeef-b1d011bd3932\",\n    \"actor\": \"mrlubos\",\n    \"actor_id\": \"12529395\",\n    \"branch\": \"feat/awesome-feature\",\n    \"branch_base\": \"main\",\n    \"ci_platform\": \"github\",\n    \"commit_sha\": \"1c6945d83eab3580791eb4148562b3bd2e16df14\",\n    \"creator_user_id\": \"5d2827a4-b3fc-4946-bb3b-72f23e89c6aa\",\n    \"created_at\": \"2025-02-21T02:37:15.840Z\",\n    \"event_name\": \"push\",\n    \"id\": \"e4ce4324-1177-47ca-aeef-b1d011bd3932\",\n    \"job\": \"ci\",\n    \"project_id\": \"e4ce4324-1177-47ca-aeef-b1d011bd3932\",\n    \"ref\": \"refs/heads/main\",\n    \"ref_type\": \"branch\",\n    \"repository\": \"hey-api/platform\",\n    \"run_id\": \"13448896305\",\n    \"run_number\": \"1\",\n    \"updated_at\": \"2025-02-21T02:37:15.840Z\",\n    \"tags\": [\n      \"dev\"\n    ],\n    \"version\": \"1.0.0\",\n    \"workflow\": \"CI\"\n  },\n  \"id\": \"e4ce4324-1177-47ca-aeef-b1d011bd3932\",\n  \"object\": \"<string>\",\n  \"timestamp\": \"<number>\",\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Unauthorized\",\n    \"request_id\": \"req_1234567890\",\n    \"status\": 400,\n    \"timestamp\": \"2025-02-21T02:37:15.840Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bf8cbed0-2489-4eae-8b77-750cdc2686c7",
+    "name": "Hey Internal API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Hey API REST backend",
+      "type": "text/plain"
+    }
+  }
+}

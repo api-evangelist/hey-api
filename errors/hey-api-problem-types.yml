@@ -1,0 +1,100 @@
+generated: '2026-08-06'
+method: derived
+source: openapi/hey-api-platform-openapi.json
+format: proprietary-envelope
+rfc9457: false
+api: Hey API Platform API
+
+envelope:
+  content_type: application/json
+  shape: |
+    {
+      "error": {
+        "message": "Unauthorized",
+        "request_id": "req_1234567890",
+        "status": 401,
+        "timestamp": "2025-02-21T02:37:15.840Z"
+      }
+    }
+  fields:
+    - name: message
+      type: string
+      description: Human-readable failure description.
+    - name: request_id
+      type: string
+      description: Opaque correlation id to quote in a support request.
+    - name: status
+      type: integer
+      constraint: 'minimum 400, exclusiveMaximum 600'
+      description: Mirrors the HTTP status code.
+    - name: timestamp
+      type: string (date-time)
+      description: When the failure occurred.
+  note: >-
+    Hey API does NOT use application/problem+json (RFC 9457). The envelope is
+    consistent across every failing operation, but it carries no machine-
+    readable `type` URI and no per-error code, so an agent can only branch on
+    the HTTP status — the `message` string is the sole discriminator.
+
+problems:
+  - status: 401
+    title: Unauthorized
+    meaning: >-
+      Missing, malformed or unrecognized credential. On Clerk-secured
+      operations this is also what an expired or absent session token returns
+      (observed alongside the response header
+      x-clerk-auth-reason: session-token-and-uat-missing).
+    remediation: >-
+      Send `Authorization: Bearer <api_key>` (platform key) or a valid Clerk
+      session JWT. For spec upload the key must be a PROJECT key — personal
+      keys are rejected.
+    occurrences: 37
+    applies_to: every secured operation
+  - status: 403
+    title: Forbidden
+    meaning: >-
+      Authenticated, but the caller is not permitted on this organization,
+      project or record — or the credential is the wrong KIND (a personal API
+      key attempting POST /v1/specifications).
+    remediation: >-
+      Check the caller's role on the organization
+      (GET /v1/users/{user_id}/roles returns active | invited | suspended) and
+      that the key belongs to the target project.
+    occurrences: 29
+  - status: 404
+    title: Not Found
+    meaning: >-
+      The organization/project pair, or the specification/webhook id, does not
+      exist or is not visible to the caller.
+    remediation: >-
+      Verify the organization_slug/project_slug pair. A private project
+      requested anonymously surfaces here rather than as a 401.
+    occurrences: 5
+    applies_to:
+      - GET /v1/get/{organization_slug}/{project_slug}
+      - GET /v1/organizations/{organization_slug}/projects/{project_slug}/specifications/{specification_id}
+      - DELETE /v1/organizations/{organization_slug}/projects/{project_slug}/specifications/{specification_id}
+      - GET /v1/organizations/{organization_slug}/projects/{project_slug}/webhooks/{webhook_id}
+  - status: 413
+    title: Content Too Large
+    meaning: The uploaded OpenAPI document exceeds the platform's accepted size.
+    remediation: >-
+      Reduce the document (bundle/dereference selectively) or contact Hey API.
+      No published size ceiling exists — the limit is discoverable only by
+      hitting it.
+    occurrences: 1
+    applies_to:
+      - POST /v1/specifications
+    unique_to: the only capacity-shaped error in the contract
+
+gaps:
+  - >-
+    No 400 Bad Request is declared on ANY operation, including the multipart
+    upload — a malformed OpenAPI document has no documented failure mode.
+  - >-
+    No 429 and no rate-limit contract anywhere in the spec.
+  - >-
+    No 5xx responses are declared on any of the 38 operations.
+  - >-
+    No stable error code vocabulary; `message` is free text, so clients cannot
+    branch on cause without string matching.

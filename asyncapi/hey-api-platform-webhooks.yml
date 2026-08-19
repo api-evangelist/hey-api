@@ -1,0 +1,94 @@
+generated: '2026-08-06'
+method: derived
+source: openapi/hey-api-platform-openapi.json
+spec_type: Webhooks
+asyncapi_published: false
+asyncapi_note: >-
+  Hey API publishes NO AsyncAPI document. Probed /asyncapi.yaml and
+  /asyncapi.json on heyapi.dev and api.heyapi.dev (404), and the GitHub org
+  carries no event spec. This artifact is the webhook catalog derived from the
+  provider's own OpenAPI — it is deliberately NOT dressed up as an AsyncAPI
+  document, because Hey API did not author one.
+
+api: Hey API Platform API
+description: >-
+  Project-scoped outbound webhooks. A project owner registers an HTTPS
+  endpoint; Hey API POSTs a signed event to it when a specification is created
+  or deleted. This is what makes the registry reactive — a downstream repo can
+  regenerate its client the moment a new spec lands.
+
+subscription_management:
+  create: POST /v1/organizations/{organization_slug}/projects/{project_slug}/webhooks
+  create_body: '{ "endpoint": "https://example.com/api/webhooks" }'
+  list: GET /v1/organizations/{organization_slug}/projects/{project_slug}/webhooks
+  read: GET /v1/organizations/{organization_slug}/projects/{project_slug}/webhooks/{webhook_id}
+  update: POST /v1/organizations/{organization_slug}/projects/{project_slug}/webhooks/{webhook_id}
+  delete: DELETE /v1/organizations/{organization_slug}/projects/{project_slug}/webhooks/{webhook_id}
+  auth: Clerk session JWT
+  enable_flag: Webhook.is_enabled (boolean)
+
+signing:
+  secret_field: Webhook.secret
+  secret_prefix: whsec_
+  disclosure: >-
+    The secret is only present on the `Webhook` schema returned at creation.
+    Every listing returns `WebhookConcealed`, which omits it.
+  algorithm: not documented
+  signature_header: not documented
+  note: >-
+    A signing secret exists in the contract but the verification procedure —
+    header name, hashing scheme, timestamp tolerance — is published nowhere.
+    A consumer cannot currently verify a Hey API webhook from public docs.
+    This is a real gap for the provider to close.
+
+envelope:
+  shape: |
+    {
+      "id": "e4ce4324-1177-47ca-aeef-b1d011bd3932",
+      "object": "event",
+      "type": "specification.created",
+      "timestamp": 1740105435,
+      "data": { ...Specification }
+    }
+  fields:
+    - name: id
+      type: string (uuid)
+      required: true
+    - name: object
+      type: string
+      enum: [event]
+      required: true
+    - name: type
+      type: string
+      required: true
+    - name: timestamp
+      type: number
+      required: true
+    - name: data
+      schema: Specification
+      required: true
+  source_operation: POST /v1/internal/webhooks/hey-api
+
+events:
+  - type: specification.created
+    payload: Specification
+    description: >-
+      A new OpenAPI document was uploaded to a project — typically by the
+      hey-api/upload-openapi-spec GitHub Action on a push or pull request.
+      The payload carries the full CI provenance (repository, branch,
+      commit_sha, workflow, run_id, actor, tags, version).
+    typical_consumer_action: regenerate the downstream SDK against the new spec
+  - type: specification.deleted
+    payload: Specification
+    description: A stored specification was removed from the project.
+
+delivery:
+  retries: not documented
+  ordering: not documented
+  timeout: not documented
+
+x-evidence:
+  fetched: '2026-08-06'
+  spec_url: https://api.heyapi.dev/v1/get/hey-api/backend
+  spec_http_status: 200
+  event_types_source: components -> paths./v1/internal/webhooks/hey-api.post.requestBody type enum

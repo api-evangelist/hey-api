@@ -1,0 +1,113 @@
+generated: '2026-08-06'
+method: searched
+source: >-
+  https://heyapi.dev/docs/openapi/typescript/get-started,
+  https://heyapi.dev/docs/openapi/typescript/configuration,
+  https://heyapi.dev/docs/openapi/python/get-started
+name: openapi-ts
+description: >-
+  Hey API's first-party code-generation CLI. Reads an OpenAPI document from a
+  path, a URL, or the Hey API registry shorthand and emits production-grade
+  TypeScript (SDKs, types, validators, query hooks, mocks, framework
+  handlers). A sibling Python generator ships the same shape.
+official: true
+license: MIT
+
+binaries:
+  - name: openapi-ts
+    package: '@hey-api/openapi-ts'
+    package_url: https://www.npmjs.com/package/@hey-api/openapi-ts
+    runtime: Node.js 22+
+  - name: openapi-python
+    package: hey-api (PyPI) / '@hey-api/openapi-python' (npm)
+    package_url: https://pypi.org/project/hey-api/
+    docs: https://heyapi.dev/docs/openapi/python/get-started
+
+install:
+  - manager: npx
+    command: npx @hey-api/openapi-ts -i hey-api/backend -o src/client
+    note: zero-install quick start, straight from the docs
+  - manager: npm
+    command: npm install @hey-api/openapi-ts -D -E
+  - manager: pnpm
+    command: pnpm add @hey-api/openapi-ts -D -E
+  - manager: yarn
+    command: yarn add @hey-api/openapi-ts -D -E
+  - manager: bun
+    command: bun add @hey-api/openapi-ts -D
+  - manager: pip
+    command: pip install hey-api
+exact_pin_recommended: true
+exact_pin_reason: >-
+  The package is in semver initial development (0.x); the docs use -E / exact
+  pinning in every install example.
+
+invocation:
+  - kind: cli
+    example: npx @hey-api/openapi-ts -i hey-api/backend -o src/client
+  - kind: npm-script
+    example: '"scripts": { "openapi-ts": "openapi-ts" } then npm run openapi-ts'
+  - kind: node-api
+    example: |
+      import { createClient } from '@hey-api/openapi-ts';
+      createClient({ input: 'hey-api/backend', output: 'src/client' });
+  - kind: vite-plugin
+    package: '@hey-api/vite-plugin'
+    note: runs the generator inside a Vite 5/6/7/8 build
+  - kind: nuxt-module
+    package: '@hey-api/nuxt'
+
+flags:
+  - flag: -i, --input
+    description: >-
+      OpenAPI source. Accepts a local path, an HTTPS URL, a Hey API registry
+      shorthand (`<organization>/<project>`), an object, or an inline spec.
+  - flag: -o, --output
+    description: Destination folder for the generated files.
+
+config_file:
+  loader: c12 / jiti
+  formats:
+    - openapi-ts.config.ts
+    - openapi-ts.config.cjs
+    - openapi-ts.config.mjs
+    - openapi-ts.config.js
+  helper: defineConfig() exported from '@hey-api/openapi-ts'
+  keys: [input, output, plugins, parser]
+  docs: https://heyapi.dev/docs/openapi/typescript/configuration
+
+registry_integration:
+  shorthand: '<organization>/<project>'
+  resolves_to: https://get.heyapi.dev/<organization>/<project>
+  redirects_to: https://api.heyapi.dev/v1/get/<organization>/<project>
+  auth: 'api_key query parameter or Authorization: Bearer'
+  filters: [branch, commit_sha, tags, version, latest, inline]
+  docs: https://heyapi.dev/docs/openapi/typescript/integrations
+
+environment:
+  - name: NODE_TLS_REJECT_UNAUTHORIZED
+    value: '0'
+    when: consuming an HTTPS input with a self-signed cert in development
+  - name: HEY_API_USER_TOKEN
+    when: >-
+      personal API key used to read a private registry project — the pattern
+      Hey API itself uses in hey-api/upload-openapi-spec/openapi-ts.config.ts
+  - name: API_KEY
+    when: project API key consumed by the hey-api/upload-openapi-spec GitHub Action
+  - name: GITHUB_TOKEN
+    when: the same action, to resolve repository metadata (default branch)
+
+key_flows:
+  - name: Generate a client from a local spec
+    command: npx @hey-api/openapi-ts -i ./openapi.json -o src/client
+  - name: Generate a client from the Hey API registry
+    command: npx @hey-api/openapi-ts -i acme/backend -o src/client
+  - name: Pin a build to an exact upstream commit
+    command: 'input: https://get.heyapi.dev/acme/backend?commit_sha=<sha>'
+  - name: Publish a spec to the registry from CI
+    command: 'uses: hey-api/upload-openapi-spec@v1.3.0'
+
+x-evidence:
+  fetched: '2026-08-06'
+  docs_status: 200
+  npm_status: 200

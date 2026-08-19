@@ -1,0 +1,155 @@
+generated: '2026-08-06'
+method: derived
+source: openapi/hey-api-platform-openapi.json
+api: Hey API Platform API
+note: >-
+  Derived from the 12 component schemas and the id-reference fields they carry.
+  The platform has no $ref-embedded object graph beyond User -> Role and
+  Waitlist -> WaitlistFeature; every other relationship is expressed as a
+  foreign-key UUID field, so the edges below are read from those fields.
+
+entities:
+  - name: Organization
+    id: id (uuid)
+    natural_key: slug
+    fields: [id, name, slug, creator_user_id, created_at, updated_at]
+    path: /v1/organizations
+  - name: Project
+    id: id (uuid)
+    natural_key: slug
+    fields: [id, name, slug, organization_id, default_branch, creator_user_id, created_at, updated_at]
+    path: /v1/organizations/{organization_slug}/projects
+  - name: Specification
+    id: id (uuid)
+    fields:
+      - id
+      - project_id
+      - api_key_id
+      - creator_user_id
+      - actor
+      - actor_id
+      - branch
+      - branch_base
+      - ci_platform
+      - commit_sha
+      - event_name
+      - job
+      - ref
+      - ref_type
+      - repository
+      - run_id
+      - run_number
+      - workflow
+      - tags
+      - version
+      - created_at
+      - updated_at
+    path: /v1/organizations/{organization_slug}/projects/{project_slug}/specifications
+    note: >-
+      The core record. Almost every field is CI provenance — this is a
+      build-attested spec store, not just a file bucket: which commit, which
+      branch, which workflow run, which actor, which key uploaded it.
+  - name: ApiKey
+    id: id (uuid)
+    fields: [id, value, creator_user_id, last_used_at, created_at, updated_at]
+    concealed_variant: ApiKeyConcealed
+    concealed_omits: [value]
+    scopes: [project, user]
+  - name: Webhook
+    id: id (uuid)
+    fields: [id, endpoint, secret, project_id, is_enabled, creator_user_id, created_at, updated_at]
+    concealed_variant: WebhookConcealed
+    concealed_omits: [secret]
+  - name: User
+    id: id (uuid)
+    fields: [id, clerk_user_id, email, first_name, last_name, image_url, roles, created_at, updated_at]
+    external_identity: Clerk (clerk_user_id)
+  - name: Role
+    id: id (uuid)
+    fields: [id, user_id, organization_id, status, created_at, updated_at]
+    enum:
+      status: [active, invited, suspended]
+    note: The organization membership join record.
+  - name: Waitlist
+    id: id (uuid)
+    fields: [id, feature, tags, created_at, updated_at]
+  - name: WaitlistFeature
+    kind: enum
+    values: [analytics, changelogs, integrations, mcp, mocks, sdks, tests]
+    note: >-
+      A published roadmap in disguise — these are the platform capabilities
+      users can queue for. `mcp` is on the list, which is why this repo
+      records no MCP server today.
+  - name: CursorResponse
+    kind: envelope
+    fields: [start_cursor, end_cursor, has_next_page, has_previous_page]
+    note: Returned as the `filters` member of every paginated list response.
+
+relationships:
+  - from: Organization
+    to: Project
+    kind: has_many
+    via: Project.organization_id
+  - from: Project
+    to: Organization
+    kind: belongs_to
+    via: Project.organization_id
+  - from: Project
+    to: Specification
+    kind: has_many
+    via: Specification.project_id
+  - from: Specification
+    to: Project
+    kind: belongs_to
+    via: Specification.project_id
+  - from: Project
+    to: ApiKey
+    kind: has_many
+    via: path scope /v1/organizations/{organization_slug}/projects/{project_slug}/api-keys
+  - from: Project
+    to: Webhook
+    kind: has_many
+    via: Webhook.project_id
+  - from: Webhook
+    to: Project
+    kind: belongs_to
+    via: Webhook.project_id
+  - from: Specification
+    to: ApiKey
+    kind: belongs_to
+    via: Specification.api_key_id
+    note: Records WHICH key uploaded the document.
+  - from: Specification
+    to: User
+    kind: belongs_to
+    via: Specification.creator_user_id
+  - from: User
+    to: Role
+    kind: has_many
+    via: User.roles ($ref array)
+  - from: Role
+    to: Organization
+    kind: belongs_to
+    via: Role.organization_id
+  - from: Role
+    to: User
+    kind: belongs_to
+    via: Role.user_id
+  - from: User
+    to: ApiKey
+    kind: has_many
+    via: path scope /v1/users/{user_id}/api-keys
+  - from: User
+    to: Waitlist
+    kind: has_many
+    via: path scope /v1/users/{user_id}/waitlists
+  - from: Waitlist
+    to: WaitlistFeature
+    kind: has_one
+    via: Waitlist.feature ($ref enum)
+
+addressing:
+  tenancy: organization_slug / project_slug (human-readable, chosen to mirror GitHub org/repo)
+  records: RFC 4122 UUID
+  public_input_path: '<organization_slug>/<project_slug> — the codegen registry shorthand'
+  id_prefixes: none (no Stripe-style typed prefixes; ids are bare UUIDs)

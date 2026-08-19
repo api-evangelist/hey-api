@@ -1,0 +1,327 @@
+openapi: 3.2.0
+info:
+  description: Hey API REST backend
+  title: Hey Specifications API
+  version: 1.0.0
+tags:
+- name: Specifications
+paths:
+  /v1/specifications:
+    post:
+      security:
+      - ApiKey: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                actor:
+                  type: string
+                  example: mrlubos
+                actor_id:
+                  type: string
+                  example: '12529395'
+                branch:
+                  type: string
+                  example: feat/cool-feature
+                branch_base:
+                  type: string
+                  example: main
+                ci_platform:
+                  type: string
+                  example: github
+                commit_sha:
+                  type: string
+                  example: 678e8b7a0d1f495c4a6d011fb76c136955c7f260
+                default_branch:
+                  type: string
+                  example: main
+                dry_run:
+                  type: string
+                  example: false
+                event_name:
+                  type: string
+                  example: pull_request
+                job:
+                  type: string
+                  example: ci
+                ref:
+                  type: string
+                  example: refs/pull/1/merge
+                ref_type:
+                  type: string
+                  example: branch
+                repository:
+                  type: string
+                  example: hey-api/platform
+                run_id:
+                  type: string
+                  example: '13432046322'
+                run_number:
+                  type: string
+                  example: '1'
+                specification:
+                  type: string
+                  format: binary
+                tags:
+                  type: string
+                  example: dev
+                workflow:
+                  type: string
+                  example: CI
+              required:
+              - specification
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Specification'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+        '413':
+          description: Content Too Large
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+      tags:
+      - Specifications
+components:
+  schemas:
+    Specification:
+      type: object
+      properties:
+        api_key_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        actor:
+          type:
+          - string
+          - 'null'
+          example: mrlubos
+        actor_id:
+          type:
+          - string
+          - 'null'
+          example: '12529395'
+        branch:
+          type:
+          - string
+          - 'null'
+          example: feat/awesome-feature
+        branch_base:
+          type:
+          - string
+          - 'null'
+          example: main
+        ci_platform:
+          type:
+          - string
+          - 'null'
+          example: github
+        commit_sha:
+          type:
+          - string
+          - 'null'
+          example: 1c6945d83eab3580791eb4148562b3bd2e16df14
+        creator_user_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        event_name:
+          type:
+          - string
+          - 'null'
+          example: push
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        job:
+          type:
+          - string
+          - 'null'
+          example: ci
+        project_id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        ref:
+          type:
+          - string
+          - 'null'
+          example: refs/heads/main
+        ref_type:
+          type:
+          - string
+          - 'null'
+          example: branch
+        repository:
+          type:
+          - string
+          - 'null'
+          example: hey-api/platform
+        run_id:
+          type:
+          - string
+          - 'null'
+          example: '13448896305'
+        run_number:
+          type:
+          - string
+          - 'null'
+          example: '1'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        tags:
+          type: array
+          items:
+            type: string
+          example:
+          - dev
+        version:
+          type:
+          - string
+          - 'null'
+          example: 1.0.0
+        workflow:
+          type:
+          - string
+          - 'null'
+          example: CI
+      required:
+      - api_key_id
+      - actor
+      - actor_id
+      - branch
+      - branch_base
+      - ci_platform
+      - commit_sha
+      - creator_user_id
+      - created_at
+      - event_name
+      - id
+      - job
+      - project_id
+      - ref
+      - ref_type
+      - repository
+      - run_id
+      - run_number
+      - updated_at
+      - tags
+      - version
+      - workflow
+  securitySchemes:
+    ApiKey:
+      description: API key
+      scheme: bearer
+      type: http
+    Clerk:
+      bearerFormat: JWT
+      description: Clerk JWT token
+      scheme: bearer
+      type: http

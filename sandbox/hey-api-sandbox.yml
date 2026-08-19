@@ -1,0 +1,94 @@
+generated: '2026-08-06'
+method: searched
+source: >-
+  openapi/hey-api-platform-openapi.json,
+  https://github.com/hey-api/upload-openapi-spec/blob/main/src/upload.ts,
+  https://heyapi.dev/docs/openapi/typescript/integrations
+api: Hey API Platform API
+
+summary: >-
+  Hey API has no separate test-mode host and no test/live key prefix pair.
+  What it does have is a per-request DRY RUN on the only destructive write in
+  the public surface, plus a public reference project anyone can read without
+  credentials. Both are recorded verbatim below; nothing here is invented.
+
+console:
+  url: https://app.heyapi.dev
+  signup: https://app.heyapi.dev
+  free_tier: >-
+    "The platform is currently in beta ... we can guarantee there will always
+    be a free plan available."
+  personal_keys: https://app.heyapi.dev/settings/user/apis
+
+dry_run:
+  supported: true
+  operation: POST /v1/specifications
+  mechanism: '`dry_run` multipart form field'
+  type: string
+  example_in_spec: false
+  cli_surface: >-
+    The hey-api/upload-openapi-spec GitHub Action exposes it as a `dryRun`
+    option on its upload() function ("Return mock response?").
+  effect: returns a mock Specification response without persisting the upload
+  note: >-
+    This is the platform's test affordance. It lets a CI pipeline validate the
+    whole upload path — credential, multipart encoding, provenance fields —
+    without creating a record.
+
+public_reference_project:
+  organization: hey-api
+  project: backend
+  url: https://get.heyapi.dev/hey-api/backend
+  resolves_to: https://api.heyapi.dev/v1/get/hey-api/backend
+  auth_required: false
+  http_status: 200
+  usage: >-
+    Hey API dogfoods its own registry with a PUBLIC project, so every docs
+    example and every quick start — `npx @hey-api/openapi-ts -i hey-api/backend
+    -o src/client` — runs end to end with no account. In practice this is the
+    provider's sandbox fixture: a real, live, unauthenticated OpenAPI document
+    to generate against.
+  note: >-
+    Projects are private by default; hey-api/backend is the deliberate public
+    exception.
+
+test_modes:
+  separate_test_host: false
+  test_key_prefix: none
+  live_key_prefix: none
+  key_format_example_in_spec: 'xx_xxxx_xxxx_xxxxxxxxxxxxxxxxxxxxxxxx (masked placeholder in the spec itself)'
+  test_clocks: false
+  fixtures: false
+
+codegen_test_tooling:
+  note: >-
+    Distinct from platform sandboxing, but this is where Hey API actually
+    invests in testability — the codegen emits mocking/testing infrastructure
+    for the CONSUMER'S api.
+  plugins:
+    - name: MSW v2
+      docs: https://heyapi.dev/docs/openapi/typescript/plugins/msw
+      emits: Mock Service Worker handlers
+    - name: Nock
+      docs: https://heyapi.dev/docs/openapi/typescript/plugins/nock
+    - name: Supertest
+      docs: https://heyapi.dev/docs/openapi/typescript/plugins/supertest
+    - name: Playwright
+      docs: https://heyapi.dev/docs/openapi/typescript/plugins/playwright
+    - name: Faker v10
+      docs: https://heyapi.dev/docs/openapi/typescript/plugins/faker
+      emits: fake data generators from the schema
+    - name: Falso
+      docs: https://heyapi.dev/docs/openapi/typescript/plugins/falso
+    - name: Chance
+      docs: https://heyapi.dev/docs/openapi/typescript/plugins/chance
+    - name: Factory Boy (Python)
+      docs: https://heyapi.dev/docs/openapi/python/plugins/factory-boy
+    - name: Mimesis (Python)
+      docs: https://heyapi.dev/docs/openapi/python/plugins/mimesis
+  testing_guide: https://heyapi.dev/docs/openapi/typescript/mocks
+
+x-evidence:
+  fetched: '2026-08-06'
+  public_project: {url: 'https://api.heyapi.dev/v1/get/hey-api/backend', http_status: 200, content_type: application/json}
+  console: {url: 'https://app.heyapi.dev/', http_status: 200}

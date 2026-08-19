@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Hey Specifications API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Specifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /v1/specifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/specifications",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "actor",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "actor_id",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "branch",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "branch_base",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "ci_platform",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "commit_sha",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "default_branch",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "dry_run",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "event_name",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "job",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "ref",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "ref_type",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "repository",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "run_id",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "run_number",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "specification",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "tags",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "workflow",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

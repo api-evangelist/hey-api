@@ -1,0 +1,155 @@
+generated: '2026-08-06'
+method: derived
+source: >-
+  openapi/hey-api-platform-openapi.json (harvested live from
+  https://api.heyapi.dev/v1/get/hey-api/backend) plus
+  https://heyapi.dev/docs/openapi/typescript/integrations
+api: Hey API Platform API
+base_url: https://api.heyapi.dev
+
+authentication:
+  style: bearer
+  header: 'Authorization: Bearer <api_key>'
+  alternate: '?api_key=<api_key> query parameter, spec-download endpoint only'
+  console_identity: Clerk session JWT
+  detail: authentication/hey-api-authentication.yml
+
+versioning:
+  scheme: uri-path
+  current: v1
+  example: https://api.heyapi.dev/v1/specifications
+  spec_version: '1.0.0'
+  note: >-
+    Every operation except the `/` liveness probe is namespaced under /v1.
+    `/v1/internal/*` paths are present in the published spec but are platform-
+    internal (Clerk-secured service hooks), not part of the consumer contract.
+
+pagination:
+  style: cursor
+  params:
+    - name: after
+      in: query
+      type: string (uuid)
+      description: Return items after this cursor.
+    - name: before
+      in: query
+      type: string (uuid)
+      description: Return items before this cursor.
+    - name: limit
+      in: query
+      type: integer
+      default: 10
+      maximum: 100
+      exclusiveMinimum: 0
+  response_envelope:
+    items: array of resources
+    filters:
+      schema: CursorResponse
+      fields:
+        - start_cursor
+        - end_cursor
+        - has_next_page
+        - has_previous_page
+  applies_to:
+    - GET /v1/organizations
+    - GET /v1/organizations/{organization_slug}/members
+    - GET /v1/organizations/{organization_slug}/projects
+    - GET /v1/organizations/{organization_slug}/projects/{project_slug}/api-keys
+    - GET /v1/organizations/{organization_slug}/projects/{project_slug}/specifications
+    - GET /v1/organizations/{organization_slug}/projects/{project_slug}/webhooks
+    - GET /v1/users/{user_id}/api-keys
+    - GET /v1/users/{user_id}/waitlists
+
+error_envelope:
+  shape: '{ "error": { "message", "request_id", "status", "timestamp" } }'
+  content_type: application/json
+  rfc9457: false
+  fields:
+    message: Human-readable error string.
+    request_id: Opaque request correlation id (e.g. req_1234567890).
+    status: Integer HTTP status, constrained 400 <= status < 600 in the schema.
+    timestamp: RFC 3339 date-time of the failure.
+  statuses_used: [401, 403, 404, 413]
+  detail: errors/hey-api-problem-types.yml
+
+request_tracing:
+  correlation_field: error.request_id
+  location: response body (error envelope)
+  request_header: none documented
+  note: >-
+    A request id is returned on FAILURE only. There is no documented
+    X-Request-Id request or success-response header, so a client cannot
+    correlate a successful call.
+
+idempotency:
+  supported: false
+  evidence: >-
+    No Idempotency-Key parameter, header, or request-body field appears in any
+    of the 38 operations, and the docs describe no replay-safe write contract.
+    Re-POSTing /v1/specifications creates another specification record.
+  note: >-
+    Deliberately recorded as false. No `Idempotency` pointer is wired in
+    apis.yml — the provider has no idempotency contract to point at.
+
+rate_limits:
+  documented: false
+  headers: none observed
+  note: >-
+    Neither the spec nor the docs publish rate-limit headers or quotas. The
+    only capacity signal in the contract is a 413 Content Too Large on
+    POST /v1/specifications.
+  detail: rate-limits/hey-api-rate-limits.yml
+
+resource_addressing:
+  style: human-readable slugs for tenancy, UUIDs for records
+  tenancy_path: /v1/organizations/{organization_slug}/projects/{project_slug}/...
+  record_ids: RFC 4122 UUIDs (specification_id, api_key_id, webhook_id, user_id)
+  convention: >-
+    The docs recommend naming your organization/project to match your GitHub
+    structure, because the pair becomes the public codegen input path
+    (`npx @hey-api/openapi-ts -i hey-api/backend`).
+
+http_verb_semantics:
+  create: POST to the collection
+  read: GET
+  delete: DELETE
+  update: >-
+    POST to the item path (not PUT/PATCH) — e.g. POST
+    /v1/.../api-keys/{api_key_id}. PUT appears exactly once, on
+    /v1/users/{user_id}/waitlists/{waitlist_id}. This is a real inconsistency
+    in the contract, recorded rather than smoothed over.
+
+content_types:
+  upload: multipart/form-data (POST /v1/specifications, `specification` binary part)
+  responses: application/json
+  spec_download: application/json or application/octet-stream (see `inline` query param)
+  liveness: text/plain
+
+field_conventions:
+  case: snake_case throughout
+  timestamps: RFC 3339 date-time, `created_at` / `updated_at` on every resource
+  nullability: 'union types, e.g. "type": ["string", "null"]'
+  concealed_secrets: >-
+    Secret-bearing resources have a paired `*Concealed` schema. `ApiKey` =
+    ApiKeyConcealed + `value`; `Webhook` = WebhookConcealed + `secret`. Only
+    the create response returns the full form; listings return the concealed
+    form. A genuinely good convention worth naming.
+
+dry_run:
+  supported: true
+  scope: POST /v1/specifications
+  mechanism: '`dry_run` field in the multipart form body'
+  detail: sandbox/hey-api-sandbox.yml
+
+filtering:
+  endpoint: GET /v1/get/{organization_slug}/{project_slug}
+  params: [branch, commit_sha, tags, version, latest, inline, api_key]
+  default: last uploaded specification
+  docs: https://heyapi.dev/docs/openapi/typescript/integrations
+
+cross_links:
+  authentication: authentication/hey-api-authentication.yml
+  errors: errors/hey-api-problem-types.yml
+  lifecycle: lifecycle/hey-api-lifecycle.yml
+  webhooks: asyncapi/hey-api-platform-webhooks.yml
+  data_model: data-model/hey-api-data-model.yml

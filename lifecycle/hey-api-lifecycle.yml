@@ -1,0 +1,94 @@
+generated: '2026-08-06'
+method: searched
+source: >-
+  https://heyapi.dev/docs/openapi/typescript/get-started,
+  https://heyapi.dev/docs/openapi/typescript/migrating,
+  https://github.com/hey-api/hey-api/releases,
+  openapi/hey-api-platform-openapi.json
+
+versioning:
+  api:
+    scheme: uri-path
+    current: v1
+    spec_version: '1.0.0'
+    source: openapi/hey-api-platform-openapi.json
+  packages:
+    scheme: semver
+    stage: initial development (0.x)
+    current: '@hey-api/openapi-ts 0.99.0'
+    docs: https://heyapi.dev/docs/openapi/typescript/get-started
+    policy: >-
+      "This package is in initial development. Please pin an exact version so
+      you can safely upgrade when you're ready." The docs instruct installing
+      with -E (exact) precisely because a 0.x minor may break.
+  release_cadence:
+    observed: weekly-to-fortnightly dated releases
+    scheme: date-tagged umbrella releases (e.g. 2026-06-22) that roll up per-package semver bumps
+    evidence: github.com/hey-api/hey-api/releases
+
+deprecation:
+  policy_url: https://heyapi.dev/docs/openapi/typescript/migrating
+  policy: >-
+    Migration notes are published for every breaking release of
+    @hey-api/openapi-ts. Breaking changes are called out inline in the release
+    notes with a "⚠️ Breaking" marker and a per-change explanation (the
+    2026-06-22 / 0.99.0 release carried 4).
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  note: >-
+    The migration policy covers the OPEN-SOURCE CODEGEN, not the hosted
+    platform API. The platform API publishes no deprecation policy, no Sunset
+    or Deprecation header support, and marks no operation `deprecated: true`.
+
+sla:
+  published: false
+  url: null
+
+status_page:
+  published: false
+  probed:
+    - url: https://status.heyapi.dev/
+      status: 404
+  note: >-
+    No status page found on any Hey API host. The platform backend runs on
+    Railway behind Vercel (observed `server: railway-hikari` and
+    `server: Vercel` response headers) with no public status surface. No
+    StatusPage pointer is wired.
+
+stability:
+  platform:
+    stage: beta
+    evidence: >-
+      "This feature is in development! 🎉" callout on the integrations page,
+      and "The platform is currently in beta with our focus being on
+      delivering a great experience."
+    pricing_commitment: >-
+      "We plan to announce pricing once we have gathered enough data around
+      usage patterns. However, we can guarantee there will always be a free
+      plan available."
+  codegen:
+    stage: production
+    evidence: >-
+      4,088,177 npm downloads in the week ending 2026-08-05; named users
+      include Vercel, OpenCode and PayPal.
+
+feedback_channels:
+  - kind: github-discussions
+    url: https://github.com/orgs/hey-api/discussions/1773
+    note: The platform feedback thread the docs point at by name.
+  - kind: email
+    url: mailto:lubos@heyapi.dev
+  - kind: issues
+    url: https://github.com/hey-api/hey-api/issues
+
+license:
+  spdx: MIT
+  url: https://heyapi.dev/docs/openapi/typescript/license
+  applies_to: all @hey-api npm packages and the hey-api PyPI package
+
+x-evidence:
+  fetched: '2026-08-06'
+  status_page_probe: {url: 'https://status.heyapi.dev/', http_status: 404}
+  releases: {url: 'https://api.github.com/repos/hey-api/hey-api/releases', http_status: 200}

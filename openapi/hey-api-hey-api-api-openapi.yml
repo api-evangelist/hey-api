@@ -1,0 +1,31 @@
+openapi: 3.2.0
+info:
+  description: Hey API REST backend
+  title: Hey Hey API API
+  version: 1.0.0
+tags:
+- name: Hey API
+paths:
+  /:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Hey API Backend v1.0.0 👋
+      tags:
+      - Hey API
+components:
+  securitySchemes:
+    ApiKey:
+      description: API key
+      scheme: bearer
+      type: http
+    Clerk:
+      bearerFormat: JWT
+      description: Clerk JWT token
+      scheme: bearer
+      type: http

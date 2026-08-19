@@ -1,0 +1,69 @@
+generated: '2026-08-06'
+method: searched
+source: https://github.com/hey-api/hey-api/releases
+also: https://github.com/hey-api/hey-api/blob/main/CHANGELOG.md
+scheme: >-
+  Date-tagged umbrella releases (YYYY-MM-DD, suffixed .2 for a same-day second
+  cut) that roll up per-package semver bumps. Individual packages also carry
+  their own tags (e.g. @hey-api/openapi-ts@0.95.0) for releases published
+  before the dated scheme was adopted in April 2026.
+current_version: '@hey-api/openapi-ts 0.99.0'
+breaking_change_marker: '"⚠️ Breaking" heading in the release body'
+migration_notes: https://heyapi.dev/docs/openapi/typescript/migrating
+window: recent releases only — the live releases feed is the source of truth
+entries:
+  - tag: '2026-06-22'
+    date: '2026-06-22'
+    version: '@hey-api/openapi-ts 0.99.0'
+    breaking: true
+    breaking_count: 4
+    highlights:
+      - 'parser: delete unresolvable $ref keywords (#4087)'
+      - 'api: replace ~ fields with $ (#4086)'
+      - 'client: use getBaseUrl() to determine the default value (#3772)'
+      - 'config: merge duplicate plugin configurations (breaking — previously only the last instance was used)'
+      - 'config: add Presets API'
+      - 'exports: add /plugins exported module'
+  - tag: '2026-06-08'
+    date: '2026-06-08'
+    version: '@hey-api/openapi-ts 0.98.2'
+    breaking: false
+    highlights:
+      - 'all clients: export augmentable ClientMeta interface (#3996)'
+      - 'client-angular: reassign the result of HttpHeaders.delete() back to opts.headers (#3988)'
+  - tag: '2026-06-01.2'
+    date: '2026-06-01'
+    version: '@hey-api/openapi-ts 0.98.1'
+    breaking: false
+    highlights:
+      - 'cli: simplify generate command messages (#3982)'
+      - 'valibot + zod: revert referencing TypeScript enums (#3982)'
+      - '@hey-api/codegen-core 0.8.4 — node: add ~dsl property'
+      - '@hey-api/shared 0.4.7 — plugin: generics support in querySymbol()/querySymbols()'
+  - tag: '2026-06-01'
+    date: '2026-06-01'
+  - tag: '2026-05-25'
+    date: '2026-05-25'
+  - tag: '2026-05-18'
+    date: '2026-05-18'
+  - tag: '2026-05-04'
+    date: '2026-05-04'
+  - tag: '2026-04-28'
+    date: '2026-04-28'
+  - tag: '2026-04-20'
+    date: '2026-04-20'
+  - tag: '2026-04-13'
+    date: '2026-04-13'
+    note: first dated umbrella release; prior releases used per-package semver tags
+platform_api_changelog:
+  published: false
+  note: >-
+    The changelog above covers the open-source codegen. The hosted Hey API
+    Platform API (api.heyapi.dev) publishes no changelog of its own — its
+    OpenAPI has been at info.version 1.0.0 since the surface appeared, with no
+    dated release notes. `changelogs` is itself one of the waitlisted platform
+    features (WaitlistFeature enum in the spec).
+x-evidence:
+  fetched: '2026-08-06'
+  url: https://api.github.com/repos/hey-api/hey-api/releases
+  http_status: 200

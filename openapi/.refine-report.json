@@ -1,0 +1,32 @@
+{
+  "provider": "hey-api",
+  "sources": [
+    "hey-api-get-api-openapi.yml",
+    "hey-api-hey-api-api-openapi.yml",
+    "hey-api-internal-api-openapi.yml",
+    "hey-api-organizations-api-openapi.yml",
+    "hey-api-specifications-api-openapi.yml",
+    "hey-api-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "hey-api-get-api-openapi.yml",
+    "hey-api-hey-api-api-openapi.yml",
+    "hey-api-internal-api-openapi.yml",
+    "hey-api-organizations-api-openapi.yml",
+    "hey-api-specifications-api-openapi.yml",
+    "hey-api-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "hey-api-get-api-openapi.yml: upgraded openapi 3.1.1 -> OpenAPI 3.2.0",
+    "hey-api-hey-api-api-openapi.yml: upgraded openapi 3.1.1 -> OpenAPI 3.2.0",
+    "hey-api-internal-api-openapi.yml: upgraded openapi 3.1.1 -> OpenAPI 3.2.0",
+    "hey-api-organizations-api-openapi.yml: upgraded openapi 3.1.1 -> OpenAPI 3.2.0",
+    "hey-api-specifications-api-openapi.yml: upgraded openapi 3.1.1 -> OpenAPI 3.2.0",
+    "hey-api-users-api-openapi.yml: upgraded openapi 3.1.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

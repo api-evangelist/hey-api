@@ -1,0 +1,95 @@
+generated: '2026-08-06'
+method: probed
+source: live GET probes of the /.well-known/ surface on every Hey API host
+hosts:
+  - https://heyapi.dev
+  - https://api.heyapi.dev
+  - https://app.heyapi.dev
+documents:
+  - host: heyapi.dev
+    path: /.well-known/security.txt
+    status: 404
+  - host: heyapi.dev
+    path: /.well-known/openid-configuration
+    status: 404
+  - host: heyapi.dev
+    path: /.well-known/oauth-authorization-server
+    status: 404
+  - host: heyapi.dev
+    path: /.well-known/api-catalog
+    status: 404
+  - host: heyapi.dev
+    path: /.well-known/ai-plugin.json
+    status: 404
+  - host: heyapi.dev
+    path: /.well-known/agent-card.json
+    status: 404
+  - host: heyapi.dev
+    path: /.well-known/agent.json
+    status: 404
+  - host: api.heyapi.dev
+    path: /.well-known/security.txt
+    status: 404
+  - host: api.heyapi.dev
+    path: /.well-known/oauth-authorization-server
+    status: 404
+  - host: api.heyapi.dev
+    path: /.well-known/oauth-protected-resource
+    status: 404
+  - host: api.heyapi.dev
+    path: /.well-known/agent-card.json
+    status: 404
+  - host: api.heyapi.dev
+    path: /.well-known/agent.json
+    status: 404
+  - host: app.heyapi.dev
+    path: /.well-known/agent-card.json
+    status: 200
+    accepted: false
+    reason: >-
+      SPA catch-all. app.heyapi.dev answers 200 with the SolidStart HTML shell
+      for every unmatched path, including every /.well-known/* path. Body is
+      <!DOCTYPE html>, not a JSON AgentCard — rejected as a false positive, no
+      a2a/ artifact written.
+# Not under /.well-known/, but the real machine-readable discovery + consent
+# surface Hey API actually publishes:
+discovery:
+  - kind: llms.txt
+    url: https://heyapi.dev/llms.txt
+    status: 200
+    file: ../llms/hey-api-llms.txt
+  - kind: llms.txt (abridged)
+    url: https://heyapi.dev/llms-small.txt
+    status: 200
+  - kind: llms.txt (full)
+    url: https://heyapi.dev/llms-full.txt
+    status: 200
+    note: Not committed — *-llms-full.txt is gitignored.
+  - kind: sitemap
+    url: https://heyapi.dev/sitemap-index.xml
+    status: 200
+  - kind: openapi
+    url: https://api.heyapi.dev/v1/get/hey-api/backend
+    status: 200
+    file: ../openapi/hey-api-platform-openapi.json
+    note: >-
+      Hey API dogfoods its own registry — the platform's own OpenAPI 3.1.1 is
+      published through the public spec-download endpoint, unauthenticated.
+content_signal:
+  source: https://heyapi.dev/robots.txt
+  status: 200
+  file: hey-api-robots.txt
+  directive: 'Content-Signal: ai-train=yes, search=yes, ai-input=yes'
+  interpretation:
+    ai_train: allowed
+    search: allowed
+    ai_input: allowed
+  note: >-
+    Cloudflare Content Signals Policy directive served in robots.txt. Hey API
+    explicitly permits AI training, search indexing, and AI input (RAG/grounding)
+    on its documentation. This is a published machine-readable consent signal.
+security_txt: none
+x-evidence:
+  fetched: '2026-08-06'
+  robots_txt_status: 200
+  security_txt_status: 404

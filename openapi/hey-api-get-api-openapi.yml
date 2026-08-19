@@ -1,0 +1,189 @@
+openapi: 3.2.0
+info:
+  description: Hey API REST backend
+  title: Hey Get API
+  version: 1.0.0
+tags:
+- name: Get
+paths:
+  /v1/get/{organization_slug}/{project_slug}:
+    get:
+      security:
+      - ApiKey: []
+      - Clerk: []
+      - {}
+      parameters:
+      - schema:
+          type: string
+          example: hey-api
+        required: true
+        name: organization_slug
+        in: path
+      - schema:
+          type: string
+          example: backend
+        required: true
+        name: project_slug
+        in: path
+      - schema:
+          type: string
+          example: xx_xxxx_xxxx_xxxxxxxxxxxxxxxxxxxxxxxx
+        required: false
+        name: api_key
+        in: query
+      - schema:
+          type: string
+          example: feat/awesome-feature
+        required: false
+        name: branch
+        in: query
+      - schema:
+          type: string
+          example: 1c6945d83eab3580791eb4148562b3bd2e16df14
+        required: false
+        name: commit_sha
+        in: query
+      - schema:
+          type: boolean
+          default: false
+          example: true
+        required: false
+        name: inline
+        in: query
+      - schema:
+          type: boolean
+          example: true
+        required: false
+        name: latest
+        in: query
+      - schema:
+          type: string
+          example: dev
+        required: false
+        name: tags
+        in: query
+      - schema:
+          type: string
+          example: 1.0.0
+        required: false
+        name: version
+        in: query
+      responses:
+        '200':
+          description: Specification file contents
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/octet-stream:
+              schema: {}
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+      tags:
+      - Get
+components:
+  securitySchemes:
+    ApiKey:
+      description: API key
+      scheme: bearer
+      type: http
+    Clerk:
+      bearerFormat: JWT
+      description: Clerk JWT token
+      scheme: bearer
+      type: http

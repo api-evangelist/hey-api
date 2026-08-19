@@ -1,0 +1,145 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Hey API Platform API
+  version: 1.0.0
+extends: openapi/hey-api-platform-openapi.json
+x-provenance:
+  generated: '2026-08-06'
+  method: generated
+  source: >-
+    Authored by the API Evangelist enrichment pipeline against the verbatim
+    spec harvested from https://api.heyapi.dev/v1/get/hey-api/backend on
+    2026-08-06. The original document is never mutated.
+  note: >-
+    The harvested spec declares no servers, no operationIds, no summaries and
+    no tags on any of its 38 operations. Those are the four things a codegen —
+    and an agent — needs most, which is a striking omission for the API of a
+    codegen company. This overlay adds them as OUR annotations. It does NOT
+    change any path, parameter, schema or response.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-slug: hey-api
+      x-apievangelist-harvested-from: https://api.heyapi.dev/v1/get/hey-api/backend
+      x-apievangelist-harvested-on: '2026-08-06'
+      contact:
+        name: Hey API
+        email: lubos@heyapi.dev
+        url: https://heyapi.dev
+      license:
+        name: MIT
+        identifier: MIT
+
+  - target: $
+    update:
+      servers:
+        - url: https://api.heyapi.dev
+          description: Hey API Platform production API
+        - url: https://get.heyapi.dev
+          description: >-
+            Vanity host for specification download; 308-redirects to
+            https://api.heyapi.dev/v1/get/{organization_slug}/{project_slug}
+      tags:
+        - name: specifications
+          description: Upload, list, fetch and delete stored OpenAPI documents.
+        - name: organizations
+          description: Organization and membership management.
+        - name: projects
+          description: Projects inside an organization; the unit a spec belongs to.
+        - name: api-keys
+          description: Project and personal API key lifecycle.
+        - name: webhooks
+          description: Project-scoped outbound event subscriptions.
+        - name: users
+          description: Current user, roles and waitlists.
+        - name: internal
+          description: >-
+            Platform-internal service hooks published in the spec but not part
+            of the consumer contract.
+        - name: meta
+          description: Liveness.
+
+  - target: $.paths['/'].get
+    update:
+      operationId: getRoot
+      summary: Liveness probe
+      description: Returns a plain-text banner identifying the backend build.
+      tags: [meta]
+
+  - target: $.paths['/v1/specifications'].post
+    update:
+      operationId: uploadSpecification
+      summary: Upload an OpenAPI specification
+      description: >-
+        Publishes an OpenAPI document to the project the API key belongs to,
+        along with its CI provenance. Requires a PROJECT api key — personal
+        keys are rejected with 403. Set the dry_run field to validate the call
+        without persisting a record.
+      tags: [specifications]
+
+  - target: $.paths['/v1/get/{organization_slug}/{project_slug}'].get
+    update:
+      operationId: downloadSpecification
+      summary: Download a stored OpenAPI specification
+      description: >-
+        Returns the specification file for an organization/project pair.
+        Defaults to the most recently uploaded document; narrow it with
+        branch, commit_sha, tags, version or latest. Public projects are
+        readable anonymously. This is the endpoint every codegen shorthand
+        (`-i <org>/<project>`) resolves to.
+      tags: [specifications]
+
+  - target: $.paths['/v1/organizations'].get
+    update:
+      operationId: listOrganizations
+      summary: List organizations
+      tags: [organizations]
+
+  - target: $.paths['/v1/organizations'].post
+    update:
+      operationId: createOrganization
+      summary: Create an organization
+      tags: [organizations]
+
+  - target: $.paths['/v1/organizations/{organization_slug}/projects'].get
+    update:
+      operationId: listProjects
+      summary: List projects in an organization
+      tags: [projects]
+
+  - target: $.paths['/v1/organizations/{organization_slug}/projects'].post
+    update:
+      operationId: createProject
+      summary: Create a project
+      tags: [projects]
+
+  - target: $.paths['/v1/organizations/{organization_slug}/projects/{project_slug}/specifications'].get
+    update:
+      operationId: listSpecifications
+      summary: List stored specifications for a project
+      description: Cursor paginated with after / before / limit.
+      tags: [specifications]
+
+  - target: $.paths['/v1/organizations/{organization_slug}/projects/{project_slug}/api-keys'].post
+    update:
+      operationId: createProjectApiKey
+      summary: Create a project API key
+      description: >-
+        The only response that returns the key `value`; every subsequent
+        listing returns the concealed form.
+      tags: [api-keys]
+
+  - target: $.paths['/v1/organizations/{organization_slug}/projects/{project_slug}/webhooks'].post
+    update:
+      operationId: createWebhook
+      summary: Register a webhook endpoint for a project
+      description: >-
+        Emits specification.created and specification.deleted events. The
+        signing secret is returned once, on this response only.
+      tags: [webhooks]
+
+  - target: $.paths['/v1/users/me'].get
+    update:
+      operationId: getCurrentUser
+      summary: Get the authenticated user
+      tags: [users]

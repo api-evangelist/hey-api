@@ -1,0 +1,1078 @@
+openapi: 3.2.0
+info:
+  description: Hey API REST backend
+  title: Hey Users API
+  version: 1.0.0
+tags:
+- name: Users
+paths:
+  /v1/users/me:
+    get:
+      security:
+      - Clerk: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+      tags:
+      - Users
+  /v1/users/{user_id}/api-keys:
+    get:
+      security:
+      - Clerk: []
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        required: true
+        name: user_id
+        in: path
+      - schema:
+          type: string
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        required: false
+        name: after
+        in: query
+      - schema:
+          type: string
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        required: false
+        name: before
+        in: query
+      - schema:
+          type: integer
+          exclusiveMinimum: 0
+          maximum: 100
+          default: 10
+          example: 10
+        required: false
+        name: limit
+        in: query
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  filters:
+                    $ref: '#/components/schemas/CursorResponse'
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ApiKeyConcealed'
+                required:
+                - filters
+                - items
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+      tags:
+      - Users
+    post:
+      security:
+      - Clerk: []
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        required: true
+        name: user_id
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+      tags:
+      - Users
+  /v1/users/{user_id}/api-keys/{api_key_id}:
+    delete:
+      security:
+      - Clerk: []
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        required: true
+        name: api_key_id
+        in: path
+      - schema:
+          type: string
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        required: true
+        name: user_id
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+      tags:
+      - Users
+    post:
+      security:
+      - Clerk: []
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        required: true
+        name: api_key_id
+        in: path
+      - schema:
+          type: string
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        required: true
+        name: user_id
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+      tags:
+      - Users
+  /v1/users/{user_id}/roles:
+    get:
+      security:
+      - Clerk: []
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        required: true
+        name: user_id
+        in: path
+      - schema:
+          type: string
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        required: false
+        name: after
+        in: query
+      - schema:
+          type: string
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        required: false
+        name: before
+        in: query
+      - schema:
+          type: integer
+          exclusiveMinimum: 0
+          maximum: 100
+          default: 10
+          example: 10
+        required: false
+        name: limit
+        in: query
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  filters:
+                    $ref: '#/components/schemas/CursorResponse'
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Role'
+                required:
+                - filters
+                - items
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+      tags:
+      - Users
+  /v1/users/{user_id}/waitlists:
+    get:
+      security:
+      - Clerk: []
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        required: true
+        name: user_id
+        in: path
+      - schema:
+          type: string
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        required: false
+        name: after
+        in: query
+      - schema:
+          type: string
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        required: false
+        name: before
+        in: query
+      - schema:
+          type: integer
+          exclusiveMinimum: 0
+          maximum: 100
+          default: 10
+          example: 10
+        required: false
+        name: limit
+        in: query
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  filters:
+                    $ref: '#/components/schemas/CursorResponse'
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Waitlist'
+                required:
+                - filters
+                - items
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+      tags:
+      - Users
+    post:
+      security:
+      - Clerk: []
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        required: true
+        name: user_id
+        in: path
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                feature:
+                  $ref: '#/components/schemas/WaitlistFeature'
+              required:
+              - feature
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Waitlist'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+      tags:
+      - Users
+  /v1/users/{user_id}/waitlists/{waitlist_id}:
+    delete:
+      security:
+      - Clerk: []
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        required: true
+        name: user_id
+        in: path
+      - schema:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        required: true
+        name: waitlist_id
+        in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Waitlist'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+      tags:
+      - Users
+    put:
+      security:
+      - Clerk: []
+      parameters:
+      - schema:
+          type: string
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        required: true
+        name: user_id
+        in: path
+      - schema:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        required: true
+        name: waitlist_id
+        in: path
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tags:
+                  type: array
+                  items:
+                    type: string
+                  example:
+                  - typescript
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Waitlist'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Unauthorized
+                      request_id:
+                        type: string
+                        example: req_1234567890
+                      status:
+                        type: integer
+                        minimum: 400
+                        exclusiveMaximum: 600
+                        example: 400
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: '2025-02-21T02:37:15.840Z'
+                    required:
+                    - message
+                    - request_id
+                    - status
+                    - timestamp
+                required:
+                - error
+      tags:
+      - Users
+components:
+  schemas:
+    ApiKeyConcealed:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        creator_user_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        last_used_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+      required:
+      - created_at
+      - creator_user_id
+      - id
+      - last_used_at
+      - updated_at
+    Waitlist:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        feature:
+          $ref: '#/components/schemas/WaitlistFeature'
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        tags:
+          type: array
+          items:
+            type: string
+          example:
+          - typescript
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+      required:
+      - created_at
+      - feature
+      - id
+      - tags
+      - updated_at
+    User:
+      type: object
+      properties:
+        clerk_user_id:
+          type:
+          - string
+          - 'null'
+          example: user_2tDpMYgevIkZOL76Wo6VzXxsbxD
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        email:
+          type:
+          - string
+          - 'null'
+          example: lubos@heyapi.dev
+        first_name:
+          type:
+          - string
+          - 'null'
+          example: Lubos
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        image_url:
+          type:
+          - string
+          - 'null'
+          example: https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJ0RzFucjNDbzg2azhDTWNoUlBxTHViVEdtTiJ9
+        last_name:
+          type:
+          - string
+          - 'null'
+          example: Menus
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+      required:
+      - clerk_user_id
+      - created_at
+      - email
+      - first_name
+      - id
+      - image_url
+      - last_name
+      - updated_at
+    WaitlistFeature:
+      type: string
+      enum:
+      - analytics
+      - changelogs
+      - integrations
+      - mcp
+      - mocks
+      - sdks
+      - tests
+      example: sdks
+    Role:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        organization_id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        status:
+          type: string
+          enum:
+          - active
+          - invited
+          - suspended
+          example: active
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        user_id:
+          type: string
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+      required:
+      - created_at
+      - id
+      - organization_id
+      - status
+      - updated_at
+      - user_id
+    ApiKey:
+      allOf:
+      - $ref: '#/components/schemas/ApiKeyConcealed'
+      - type: object
+        properties:
+          value:
+            type: string
+            example: xx_xxxx_xxxx_xxxxxxxxxxxxxxxxxxxxxxxx
+        required:
+        - value
+    CursorResponse:
+      type: object
+      properties:
+        end_cursor:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        has_next_page:
+          type:
+          - boolean
+          - 'null'
+          example: true
+        has_previous_page:
+          type:
+          - boolean
+          - 'null'
+          example: true
+        start_cursor:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+      required:
+      - end_cursor
+      - has_next_page
+      - has_previous_page
+      - start_cursor
+  securitySchemes:
+    ApiKey:
+      description: API key
+      scheme: bearer
+      type: http
+    Clerk:
+      bearerFormat: JWT
+      description: Clerk JWT token
+      scheme: bearer
+      type: http

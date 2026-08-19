@@ -1,0 +1,48 @@
+generated: '2026-08-06'
+method: generated
+source: >-
+  Authored from openapi/hey-api-platform-openapi.json (38 operations, harvested
+  live from https://api.heyapi.dev/v1/get/hey-api/backend) plus the Hey API
+  docs. Every operation referenced below exists verbatim in that spec. The spec
+  declares no operationIds, so operations are addressed by METHOD + PATH.
+provider: Hey API
+api: Hey API Platform API
+base_url: https://api.heyapi.dev
+skills:
+  - file: hey-api-publish-spec-from-ci.md
+    name: Publish an OpenAPI specification to the Hey API registry from CI
+    api: openapi/hey-api-platform-openapi.json
+    operations:
+      - POST /v1/specifications
+      - GET /v1/organizations/{organization_slug}/projects/{project_slug}/specifications
+  - file: hey-api-generate-client-from-registry.md
+    name: Generate a typed client from a Hey API registry specification
+    api: openapi/hey-api-platform-openapi.json
+    operations:
+      - GET /v1/get/{organization_slug}/{project_slug}
+  - file: hey-api-manage-project-keys-and-webhooks.md
+    name: Provision a Hey API organization, project, keys and webhooks
+    api: openapi/hey-api-platform-openapi.json
+    operations:
+      - GET /v1/users/me
+      - GET /v1/users/{user_id}/roles
+      - GET /v1/organizations
+      - POST /v1/organizations
+      - GET /v1/organizations/{organization_slug}/members
+      - POST /v1/organizations/{organization_slug}/members
+      - DELETE /v1/organizations/{organization_slug}/members/{user_id}
+      - POST /v1/organizations/{organization_slug}/projects
+      - GET /v1/organizations/{organization_slug}/projects/{project_slug}/api-keys
+      - POST /v1/organizations/{organization_slug}/projects/{project_slug}/api-keys
+      - POST /v1/organizations/{organization_slug}/projects/{project_slug}/api-keys/{api_key_id}
+      - DELETE /v1/organizations/{organization_slug}/projects/{project_slug}/api-keys/{api_key_id}
+      - GET /v1/organizations/{organization_slug}/projects/{project_slug}/webhooks
+      - POST /v1/organizations/{organization_slug}/projects/{project_slug}/webhooks
+      - POST /v1/organizations/{organization_slug}/projects/{project_slug}/webhooks/{webhook_id}
+      - DELETE /v1/organizations/{organization_slug}/projects/{project_slug}/webhooks/{webhook_id}
+cross_links:
+  authentication: authentication/hey-api-authentication.yml
+  conventions: conventions/hey-api-conventions.yml
+  errors: errors/hey-api-problem-types.yml
+  webhooks: asyncapi/hey-api-platform-webhooks.yml
+  sandbox: sandbox/hey-api-sandbox.yml

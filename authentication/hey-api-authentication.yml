@@ -1,0 +1,100 @@
+generated: '2026-08-06'
+method: searched
+source: openapi/hey-api-platform-openapi.json
+docs: https://heyapi.dev/docs/openapi/typescript/integrations
+summary:
+  types:
+    - http
+  http_schemes:
+    - bearer
+  api_key_in:
+    - query
+  oauth2_flows: []
+  identity_provider: Clerk
+schemes:
+  - name: ApiKey
+    type: http
+    scheme: bearer
+    description: >-
+      Hey API Platform API key, sent as `Authorization: Bearer <api_key>`.
+      Two kinds exist and they are NOT interchangeable — see key_types below.
+    sources:
+      - openapi/hey-api-platform-openapi.json
+    applies_to:
+      - POST /v1/specifications
+      - GET /v1/get/{organization_slug}/{project_slug}
+  - name: Clerk
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+    description: >-
+      Clerk-issued session JWT. This is the browser/console credential — it
+      secures every organization, project, member, api-key, webhook, waitlist
+      and user management operation on the platform API.
+    sources:
+      - openapi/hey-api-platform-openapi.json
+    identity_provider:
+      name: Clerk
+      evidence: >-
+        `Clerk JWT token` securityScheme description in the spec; the
+        `clerk_user_id` field on the User schema; and the
+        `x-clerk-auth-reason: session-token-and-uat-missing` response header
+        observed on an anonymous GET to api.heyapi.dev.
+    applies_to: 33 of 38 operations (every /v1/organizations, /v1/users and /v1/internal path)
+alternate_transport:
+  - name: api_key query parameter
+    in: query
+    parameter: api_key
+    description: >-
+      The spec-download endpoint additionally accepts the key as a query
+      parameter so any codegen CLI can consume the URL directly, e.g.
+      https://get.heyapi.dev/foo/bar?api_key=<my_api_key>
+    documented_at: https://heyapi.dev/docs/openapi/typescript/integrations
+    caution: >-
+      Query-parameter credentials land in proxy and CDN access logs and in
+      shell history. Prefer the Authorization header where the toolchain allows.
+key_types:
+  - name: project API key
+    scope: one project
+    issued_at: app.heyapi.dev > project > Integrations > APIs
+    can_upload: true
+    intended_for: CI workflows (the hey-api/upload-openapi-spec GitHub Action reads it from $API_KEY)
+  - name: personal API key
+    scope: the user's accessible projects
+    issued_at: https://app.heyapi.dev/settings/user/apis
+    can_upload: false
+    intended_for: local development / pulling specs
+    evidence: 'Docs: "Personal API keys can''t be used to upload specifications."'
+anonymous_access:
+  - operation: GET /
+    note: Unauthenticated liveness response — "Hey API Backend v1.0.0".
+  - operation: GET /v1/get/{organization_slug}/{project_slug}
+    note: >-
+      The spec declares an empty security requirement `{}` alongside ApiKey and
+      Clerk, i.e. anonymous access is permitted for PUBLIC projects. Projects
+      are private by default; hey-api/backend is public, which is how this
+      repo harvested the platform OpenAPI without credentials.
+key_lifecycle:
+  create: POST /v1/organizations/{organization_slug}/projects/{project_slug}/api-keys
+  list: GET /v1/organizations/{organization_slug}/projects/{project_slug}/api-keys
+  rotate_or_update: POST /v1/organizations/{organization_slug}/projects/{project_slug}/api-keys/{api_key_id}
+  revoke: DELETE /v1/organizations/{organization_slug}/projects/{project_slug}/api-keys/{api_key_id}
+  personal_keys: /v1/users/{user_id}/api-keys
+  last_used_tracking: 'ApiKeyConcealed.last_used_at is returned on every key listing'
+  value_disclosure: >-
+    The full key value is only present on the `ApiKey` schema (returned at
+    creation); listings return `ApiKeyConcealed`, which omits `value`.
+oauth2: false
+scopes: none
+notes: >-
+  No OAuth 2.0 and no OpenID Connect provider metadata is exposed by Hey API
+  itself — /.well-known/openid-configuration and
+  /.well-known/oauth-authorization-server both 404 on every host. Console
+  identity is delegated to Clerk; API-to-API identity is a bearer API key.
+  There is therefore no scopes/ artifact for this provider.
+x-evidence:
+  fetched: '2026-08-06'
+  spec_url: https://api.heyapi.dev/v1/get/hey-api/backend
+  spec_http_status: 200
+  docs_url: https://heyapi.dev/docs/openapi/typescript/integrations
+  docs_http_status: 200
