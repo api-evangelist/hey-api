@@ -41,7 +41,7 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/hey-api/refs/heads/main/apis.yml
 created: '2025-05-02'
 modified: '2026-08-06'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: hey-api:hey-api
   name: Hey API Openapi-Ts
