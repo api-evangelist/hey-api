@@ -30,6 +30,17 @@ tags:
   - Code Generation
   - Developer Tools
   - OpenAPI
+  - SDK
+  - TypeScript
+  - Python
+  - API Design
+  - Specifications
+  - Registry
+  - Open-Source
+tags_raw:
+  - Code Generation
+  - Developer Tools
+  - OpenAPI
   - SDKs
   - TypeScript
   - Python
@@ -56,6 +67,12 @@ apis:
   - OpenAPI
   - TypeScript
   - Python
+  - SDK
+  tags_raw:
+  - Code Generation
+  - OpenAPI
+  - TypeScript
+  - Python
   - SDKs
   properties:
   - type: Documentation
@@ -73,7 +90,8 @@ apis:
   description: The Get API from Hey API — 1 operation(s) for get.
   humanURL: https://heyapi.dev/docs/openapi/typescript/integrations
   baseURL: https://api.heyapi.dev
-  tags:
+  tags: []
+  tags_raw:
   - Get
   properties:
   - type: OpenAPI
@@ -152,6 +170,8 @@ apis:
   humanURL: https://heyapi.dev/docs/openapi/typescript/integrations
   baseURL: https://api.heyapi.dev
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
@@ -204,6 +224,8 @@ apis:
   humanURL: https://heyapi.dev/docs/openapi/typescript/integrations
   baseURL: https://api.heyapi.dev
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
