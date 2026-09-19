@@ -44,7 +44,7 @@ tags:
 - TypeScript
 - Python
 - API Design
-- Specifications
+- Specification
 - Registry
 - Open-Source
 tags_raw:
@@ -206,6 +206,8 @@ apis:
   humanURL: https://heyapi.dev/docs/openapi/typescript/integrations
   baseURL: https://api.heyapi.dev
   tags:
+  - Specification
+  tags_raw:
   - Specifications
   properties:
   - type: OpenAPI
