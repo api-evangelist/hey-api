@@ -3,6 +3,7 @@ info:
   description: Hey API REST backend
   title: Hey Get API
   version: 1.0.0
+servers: []
 tags:
 - name: Get
 paths:
@@ -176,6 +177,10 @@ paths:
                 - error
       tags:
       - Get
+      summary: Get get by organization slug by project slug
+      x-summary-source: derived
+      operationId: getV1GetByOrganizationSlugByProjectSlug
+      x-operation-id-source: derived
 components:
   securitySchemes:
     ApiKey:

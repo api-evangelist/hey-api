@@ -3,6 +3,7 @@ info:
   description: Hey API REST backend
   title: Hey Users API
   version: 1.0.0
+servers: []
 tags:
 - name: Users
 paths:
@@ -51,6 +52,10 @@ paths:
                 - error
       tags:
       - Users
+      summary: Get users me
+      x-summary-source: derived
+      operationId: getV1UsersMe
+      x-operation-id-source: derived
   /v1/users/{user_id}/api-keys:
     get:
       security:
@@ -135,6 +140,10 @@ paths:
                 - error
       tags:
       - Users
+      summary: Get users by user id api keys
+      x-summary-source: derived
+      operationId: getV1UsersByUserIdApiKeys
+      x-operation-id-source: derived
     post:
       security:
       - Clerk: []
@@ -219,6 +228,10 @@ paths:
                 - error
       tags:
       - Users
+      summary: Create users by user id api keys
+      x-summary-source: derived
+      operationId: postV1UsersByUserIdApiKeys
+      x-operation-id-source: derived
   /v1/users/{user_id}/api-keys/{api_key_id}:
     delete:
       security:
@@ -311,6 +324,10 @@ paths:
                 - error
       tags:
       - Users
+      summary: Delete users by user id api keys by api key id
+      x-summary-source: derived
+      operationId: deleteV1UsersByUserIdApiKeysByApiKeyId
+      x-operation-id-source: derived
     post:
       security:
       - Clerk: []
@@ -402,6 +419,10 @@ paths:
                 - error
       tags:
       - Users
+      summary: Create users by user id api keys by api key id
+      x-summary-source: derived
+      operationId: postV1UsersByUserIdApiKeysByApiKeyId
+      x-operation-id-source: derived
   /v1/users/{user_id}/roles:
     get:
       security:
@@ -486,6 +507,10 @@ paths:
                 - error
       tags:
       - Users
+      summary: Get users by user id roles
+      x-summary-source: derived
+      operationId: getV1UsersByUserIdRoles
+      x-operation-id-source: derived
   /v1/users/{user_id}/waitlists:
     get:
       security:
@@ -570,6 +595,10 @@ paths:
                 - error
       tags:
       - Users
+      summary: Get users by user id waitlists
+      x-summary-source: derived
+      operationId: getV1UsersByUserIdWaitlists
+      x-operation-id-source: derived
     post:
       security:
       - Clerk: []
@@ -665,6 +694,10 @@ paths:
                 - error
       tags:
       - Users
+      summary: Create users by user id waitlists
+      x-summary-source: derived
+      operationId: postV1UsersByUserIdWaitlists
+      x-operation-id-source: derived
   /v1/users/{user_id}/waitlists/{waitlist_id}:
     delete:
       security:
@@ -757,6 +790,10 @@ paths:
                 - error
       tags:
       - Users
+      summary: Delete users by user id waitlists by waitlist id
+      x-summary-source: derived
+      operationId: deleteV1UsersByUserIdWaitlistsByWaitlistId
+      x-operation-id-source: derived
     put:
       security:
       - Clerk: []
@@ -861,70 +898,12 @@ paths:
                 - error
       tags:
       - Users
+      summary: Replace users by user id waitlists by waitlist id
+      x-summary-source: derived
+      operationId: putV1UsersByUserIdWaitlistsByWaitlistId
+      x-operation-id-source: derived
 components:
   schemas:
-    ApiKeyConcealed:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        creator_user_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
-        id:
-          type: string
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        last_used_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-      required:
-      - created_at
-      - creator_user_id
-      - id
-      - last_used_at
-      - updated_at
-    Waitlist:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        feature:
-          $ref: '#/components/schemas/WaitlistFeature'
-        id:
-          type: string
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        tags:
-          type: array
-          items:
-            type: string
-          example:
-          - typescript
-        updated_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-      required:
-      - created_at
-      - feature
-      - id
-      - tags
-      - updated_at
     User:
       type: object
       properties:
@@ -978,17 +957,6 @@ components:
       - image_url
       - last_name
       - updated_at
-    WaitlistFeature:
-      type: string
-      enum:
-      - analytics
-      - changelogs
-      - integrations
-      - mcp
-      - mocks
-      - sdks
-      - tests
-      example: sdks
     Role:
       type: object
       properties:
@@ -1026,16 +994,6 @@ components:
       - status
       - updated_at
       - user_id
-    ApiKey:
-      allOf:
-      - $ref: '#/components/schemas/ApiKeyConcealed'
-      - type: object
-        properties:
-          value:
-            type: string
-            example: xx_xxxx_xxxx_xxxxxxxxxxxxxxxxxxxxxxxx
-        required:
-        - value
     CursorResponse:
       type: object
       properties:
@@ -1066,6 +1024,89 @@ components:
       - has_next_page
       - has_previous_page
       - start_cursor
+    WaitlistFeature:
+      type: string
+      enum:
+      - analytics
+      - changelogs
+      - integrations
+      - mcp
+      - mocks
+      - sdks
+      - tests
+      example: sdks
+    Waitlist:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        feature:
+          $ref: '#/components/schemas/WaitlistFeature'
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        tags:
+          type: array
+          items:
+            type: string
+          example:
+          - typescript
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+      required:
+      - created_at
+      - feature
+      - id
+      - tags
+      - updated_at
+    ApiKeyConcealed:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        creator_user_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        last_used_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+      required:
+      - created_at
+      - creator_user_id
+      - id
+      - last_used_at
+      - updated_at
+    ApiKey:
+      allOf:
+      - $ref: '#/components/schemas/ApiKeyConcealed'
+      - type: object
+        properties:
+          value:
+            type: string
+            example: xx_xxxx_xxxx_xxxxxxxxxxxxxxxxxxxxxxxx
+        required:
+        - value
   securitySchemes:
     ApiKey:
       description: API key

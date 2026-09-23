@@ -3,6 +3,7 @@ info:
   description: Hey API REST backend
   title: Hey Internal API
   version: 1.0.0
+servers: []
 tags:
 - name: Internal
 paths:
@@ -58,6 +59,10 @@ paths:
                 - error
       tags:
       - Internal
+      summary: Create internal sync users
+      x-summary-source: derived
+      operationId: postV1InternalSyncUsers
+      x-operation-id-source: derived
   /v1/internal/webhooks/clerk:
     post:
       security:
@@ -383,6 +388,10 @@ paths:
                 - error
       tags:
       - Internal
+      summary: Create internal webhooks clerk
+      x-summary-source: derived
+      operationId: postV1InternalWebhooksClerk
+      x-operation-id-source: derived
   /v1/internal/webhooks/hey-api:
     post:
       security:
@@ -464,6 +473,10 @@ paths:
                 - error
       tags:
       - Internal
+      summary: Create internal webhooks hey api
+      x-summary-source: derived
+      operationId: postV1InternalWebhooksHeyApi
+      x-operation-id-source: derived
 components:
   schemas:
     Specification:

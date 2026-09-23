@@ -3,6 +3,7 @@ info:
   description: Hey API REST backend
   title: Hey Specifications API
   version: 1.0.0
+servers: []
 tags:
 - name: Specifications
 paths:
@@ -178,6 +179,10 @@ paths:
                 - error
       tags:
       - Specifications
+      summary: Create specifications
+      x-summary-source: derived
+      operationId: postV1Specifications
+      x-operation-id-source: derived
 components:
   schemas:
     Specification:
