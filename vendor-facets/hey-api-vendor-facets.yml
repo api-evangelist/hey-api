@@ -1,0 +1,134 @@
+# Vendor facets — Hey API. The open-source TypeScript code generator for OpenAPI (SDKs, types,
+# Zod/Valibot schemas, TanStack Query hooks, 20+ plugins). The headline: it reaches one pointer,
+# sdk_count_1, and only when a provider publishes the output as its own SDK. Most runs happen
+# inside consumers' codebases, where nothing reaches the provider's surface.
+vendor: hey-api
+name: Hey API
+website: https://heyapi.dev
+areas:
+- sdk-generation
+registry_keys: []
+rubric_schema_version: 0.22.0
+generated: '2026-09-25'
+features_refreshed: '2026-09-25'
+basis: capability
+summary: >-
+  Hey API generates a TypeScript SDK, types, runtime validators and framework hooks from an OpenAPI. It
+  is free, open source and self-run. On the Kin Score it can move only sdk_count_1, and only when the
+  provider publishes the generated client as a package and declares it. One language cannot reach sdk_count_3
+  (Python is listed as coming soon). Zod and Valibot schemas are not JSON Schema, and the tool leaves
+  the contract as it found it. Nothing identifies Hey API output on a provider's surface.
+features:
+- id: ts-sdk
+  name: Typed TypeScript SDK and types
+  description: >-
+    Generated SDK clients and TypeScript interfaces from an OpenAPI, for Fetch, Axios, Angular, Next.js,
+    Nuxt and others.
+  source: https://heyapi.dev/
+  tier: open-source
+- id: validators
+  name: Zod and Valibot schemas
+  description: Runtime validation schemas generated alongside the client.
+  source: https://heyapi.dev/
+  tier: open-source
+- id: tanstack-plugins
+  name: TanStack Query and 20+ plugins
+  description: Plugins for TanStack Query hooks, Fastify and other integrations, plus a custom plugin
+    API.
+  source: https://heyapi.dev/
+  tier: open-source
+maps:
+- feature: ts-sdk
+  check: sdk_count_1
+  layer: composite
+  conditional: true
+  condition: >-
+    Only when the provider publishes the generated client as a package it maintains. Hey API is mostly
+    run by API consumers inside their own apps, and that never counts.
+  provider_must: Publish the package and declare it as an SDK entry in apis.yml.
+  catalog_pass_rate: 0.148
+  facet: developer_ergonomics
+  points: 3
+  baseline_pass_rate: 0.413
+earns_nothing:
+- feature: validators
+  check: json_schema_present
+  why: Zod and Valibot schemas are TypeScript code, not published JSON Schema.
+- feature: ts-sdk
+  check: sdk_count_3
+  why: One language (TypeScript) cannot make three SDKs. Python is listed as coming soon.
+- feature: tanstack-plugins
+  check: examples_published
+  why: Generated hooks are client code, not an example corpus.
+out_of_reach:
+  checks:
+  - cli_present
+  - mcp_server
+  - documentation_present
+  - api_reference_present
+  - llms_txt_published
+  - agent_skills
+  - agent_skill_present
+  - postman_present
+  - overlay_published
+  - contract_present
+  note: >-
+    The site describes self-hosted generation via a CLI only. It lists no docs, MCP, llms.txt, skill or
+    contract-editing output.
+unscored_practice:
+- feature: validators
+  why: Runtime validators derived from the contract are a real client practice that no check reads.
+surface:
+  developer_ergonomics:
+    reachable: 3.0
+    total: 42
+  agent_readiness:
+    reachable: 0
+    total: 139
+hard_rule: >-
+  A model, not a score. Adopting this vendor changes a provider's Kin Score only when the provider publishes
+  the resulting artifacts on its own surface; nothing here writes a score, and no sponsorship or partnership
+  can.
+method: searched
+source:
+- https://heyapi.dev/
+measured:
+  cohort:
+    method: vendors-catalog.json detections (CNAME / header / URL shape / markup), never a name match
+    detected: 0
+    in_baseline: 0
+  control:
+    basis: providers earning contract_present + documentation_present + api_reference_present, minus the
+      cohort
+    n: 5216
+  metric: >-
+    cohort_pct / control_pct = mean share of the check's points earned (derived and platform credit weighted),
+    x100
+  measured_on: '2026-09-25'
+  status: 'not measurable: 0 detected customers clear the baseline (need 20)'
+simulation:
+  simulated_on: '2026-09-25'
+  rubric: 0.23.0
+  population: providers publishing a contract (contract_present earned), replayable exactly
+  providers: 8977
+  providers_unreplayable: 987
+  providers_moved: 0
+  conditional_rows: excluded (they depend on what the API already does)
+  composite_lift:
+    median: 0.0
+    p75: 0.0
+    p90: 0.0
+    max: 0.0
+    mean_among_movers: 0.0
+  agent_readiness_lift:
+    median: 0.0
+    p75: 0.0
+    p90: 0.0
+    max: 0.0
+    mean_among_movers: 0.0
+  facet_lift_median_among_movers: {}
+  composite_band_moves: {}
+  agent_readiness_band_moves: {}
+  method: >-
+    each provider's own kin/checks file, the vendor's maps at their stated credit, the scorer's composite
+    formula; from -> to, nothing written

@@ -257,6 +257,8 @@ apis:
   - type: Sandbox
     url: sandbox/hey-api-sandbox.yml
 common:
+- type: VendorFacets
+  url: vendor-facets/hey-api-vendor-facets.yml
 - type: Overlay
   url: overlays/hey-api-platform-overlay.yaml
 - type: IssueTracker
