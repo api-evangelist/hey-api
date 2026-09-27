@@ -46,7 +46,8 @@ tags:
 - API Design
 - Specification
 - Registry
-- Open-Source
+- Open Source
+- SDK Generation
 tags_raw:
 - Code Generation
 - Developer Tools
@@ -58,6 +59,8 @@ tags_raw:
 - Specifications
 - Registry
 - Open Source
+- Open-Source
+- SDK Generation
 url: https://raw.githubusercontent.com/api-evangelist/hey-api/refs/heads/main/apis.yml
 created: '2025-05-02'
 modified: '2026-09-16'

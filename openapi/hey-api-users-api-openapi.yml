@@ -904,6 +904,72 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Role:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        organization_id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        status:
+          type: string
+          enum:
+          - active
+          - invited
+          - suspended
+          example: active
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        user_id:
+          type: string
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+      required:
+      - created_at
+      - id
+      - organization_id
+      - status
+      - updated_at
+      - user_id
+    Waitlist:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        feature:
+          $ref: '#/components/schemas/WaitlistFeature'
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        tags:
+          type: array
+          items:
+            type: string
+          example:
+          - typescript
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+      required:
+      - created_at
+      - feature
+      - id
+      - tags
+      - updated_at
     User:
       type: object
       properties:
@@ -957,43 +1023,17 @@ components:
       - image_url
       - last_name
       - updated_at
-    Role:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        id:
-          type: string
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        organization_id:
-          type: string
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        status:
-          type: string
-          enum:
-          - active
-          - invited
-          - suspended
-          example: active
-        updated_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        user_id:
-          type: string
-          format: uuid
-          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
-      required:
-      - created_at
-      - id
-      - organization_id
-      - status
-      - updated_at
-      - user_id
+    WaitlistFeature:
+      type: string
+      enum:
+      - analytics
+      - changelogs
+      - integrations
+      - mcp
+      - mocks
+      - sdks
+      - tests
+      example: sdks
     CursorResponse:
       type: object
       properties:
@@ -1024,46 +1064,16 @@ components:
       - has_next_page
       - has_previous_page
       - start_cursor
-    WaitlistFeature:
-      type: string
-      enum:
-      - analytics
-      - changelogs
-      - integrations
-      - mcp
-      - mocks
-      - sdks
-      - tests
-      example: sdks
-    Waitlist:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        feature:
-          $ref: '#/components/schemas/WaitlistFeature'
-        id:
-          type: string
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        tags:
-          type: array
-          items:
+    ApiKey:
+      allOf:
+      - $ref: '#/components/schemas/ApiKeyConcealed'
+      - type: object
+        properties:
+          value:
             type: string
-          example:
-          - typescript
-        updated_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-      required:
-      - created_at
-      - feature
-      - id
-      - tags
-      - updated_at
+            example: xx_xxxx_xxxx_xxxxxxxxxxxxxxxxxxxxxxxx
+        required:
+        - value
     ApiKeyConcealed:
       type: object
       properties:
@@ -1097,16 +1107,6 @@ components:
       - id
       - last_used_at
       - updated_at
-    ApiKey:
-      allOf:
-      - $ref: '#/components/schemas/ApiKeyConcealed'
-      - type: object
-        properties:
-          value:
-            type: string
-            example: xx_xxxx_xxxx_xxxxxxxxxxxxxxxxxxxxxxxx
-        required:
-        - value
   securitySchemes:
     ApiKey:
       description: API key

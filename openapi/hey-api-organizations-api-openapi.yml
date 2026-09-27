@@ -2563,7 +2563,54 @@ components:
       - tags
       - version
       - workflow
-    WebhookConcealed:
+    Webhook:
+      allOf:
+      - $ref: '#/components/schemas/WebhookConcealed'
+      - type: object
+        properties:
+          secret:
+            type: string
+            example: whsec_666a85c7f7ce8c891be0f650b21d0749
+        required:
+        - secret
+    Role:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        organization_id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        status:
+          type: string
+          enum:
+          - active
+          - invited
+          - suspended
+          example: active
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        user_id:
+          type: string
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+      required:
+      - created_at
+      - id
+      - organization_id
+      - status
+      - updated_at
+      - user_id
+    Project:
       type: object
       properties:
         created_at:
@@ -2576,20 +2623,25 @@ components:
           - 'null'
           format: uuid
           example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
-        endpoint:
-          type: string
-          example: https://example.com/api/webhooks
+        default_branch:
+          type:
+          - string
+          - 'null'
+          example: main
         id:
           type: string
           format: uuid
           example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        is_enabled:
-          type: boolean
-          example: true
-        project_id:
+        name:
+          type: string
+          example: Backend
+        organization_id:
           type: string
           format: uuid
           example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        slug:
+          type: string
+          example: backend
         updated_at:
           type: string
           format: date-time
@@ -2597,10 +2649,11 @@ components:
       required:
       - created_at
       - creator_user_id
-      - endpoint
+      - default_branch
       - id
-      - is_enabled
-      - project_id
+      - name
+      - organization_id
+      - slug
       - updated_at
     User:
       type: object
@@ -2655,171 +2708,6 @@ components:
       - image_url
       - last_name
       - updated_at
-    Role:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        id:
-          type: string
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        organization_id:
-          type: string
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        status:
-          type: string
-          enum:
-          - active
-          - invited
-          - suspended
-          example: active
-        updated_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        user_id:
-          type: string
-          format: uuid
-          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
-      required:
-      - created_at
-      - id
-      - organization_id
-      - status
-      - updated_at
-      - user_id
-    CursorResponse:
-      type: object
-      properties:
-        end_cursor:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        has_next_page:
-          type:
-          - boolean
-          - 'null'
-          example: true
-        has_previous_page:
-          type:
-          - boolean
-          - 'null'
-          example: true
-        start_cursor:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-      required:
-      - end_cursor
-      - has_next_page
-      - has_previous_page
-      - start_cursor
-    Webhook:
-      allOf:
-      - $ref: '#/components/schemas/WebhookConcealed'
-      - type: object
-        properties:
-          secret:
-            type: string
-            example: whsec_666a85c7f7ce8c891be0f650b21d0749
-        required:
-        - secret
-    ApiKeyConcealed:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        creator_user_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
-        id:
-          type: string
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        last_used_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-      required:
-      - created_at
-      - creator_user_id
-      - id
-      - last_used_at
-      - updated_at
-    Project:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        creator_user_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
-        default_branch:
-          type:
-          - string
-          - 'null'
-          example: main
-        id:
-          type: string
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        name:
-          type: string
-          example: Backend
-        organization_id:
-          type: string
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        slug:
-          type: string
-          example: backend
-        updated_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-      required:
-      - created_at
-      - creator_user_id
-      - default_branch
-      - id
-      - name
-      - organization_id
-      - slug
-      - updated_at
-    ApiKey:
-      allOf:
-      - $ref: '#/components/schemas/ApiKeyConcealed'
-      - type: object
-        properties:
-          value:
-            type: string
-            example: xx_xxxx_xxxx_xxxxxxxxxxxxxxxxxxxxxxxx
-        required:
-        - value
     Organization:
       type: object
       properties:
@@ -2853,6 +2741,118 @@ components:
       - id
       - name
       - slug
+      - updated_at
+    CursorResponse:
+      type: object
+      properties:
+        end_cursor:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        has_next_page:
+          type:
+          - boolean
+          - 'null'
+          example: true
+        has_previous_page:
+          type:
+          - boolean
+          - 'null'
+          example: true
+        start_cursor:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+      required:
+      - end_cursor
+      - has_next_page
+      - has_previous_page
+      - start_cursor
+    WebhookConcealed:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        creator_user_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        endpoint:
+          type: string
+          example: https://example.com/api/webhooks
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        is_enabled:
+          type: boolean
+          example: true
+        project_id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+      required:
+      - created_at
+      - creator_user_id
+      - endpoint
+      - id
+      - is_enabled
+      - project_id
+      - updated_at
+    ApiKey:
+      allOf:
+      - $ref: '#/components/schemas/ApiKeyConcealed'
+      - type: object
+        properties:
+          value:
+            type: string
+            example: xx_xxxx_xxxx_xxxxxxxxxxxxxxxxxxxxxxxx
+        required:
+        - value
+    ApiKeyConcealed:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        creator_user_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        last_used_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+      required:
+      - created_at
+      - creator_user_id
+      - id
+      - last_used_at
       - updated_at
   securitySchemes:
     ApiKey:
