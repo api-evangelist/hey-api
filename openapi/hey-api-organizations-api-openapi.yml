@@ -2428,173 +2428,16 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Organization:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        creator_user_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
-        id:
-          type: string
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        name:
-          type: string
-          example: Hey API
-        slug:
-          type: string
-          example: hey-api
-        updated_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-      required:
-      - created_at
-      - creator_user_id
-      - id
-      - name
-      - slug
-      - updated_at
-    ApiKeyConcealed:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        creator_user_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
-        id:
-          type: string
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        last_used_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-      required:
-      - created_at
-      - creator_user_id
-      - id
-      - last_used_at
-      - updated_at
-    Webhook:
+    ApiKey:
       allOf:
-      - $ref: '#/components/schemas/WebhookConcealed'
+      - $ref: '#/components/schemas/ApiKeyConcealed'
       - type: object
         properties:
-          secret:
+          value:
             type: string
-            example: whsec_666a85c7f7ce8c891be0f650b21d0749
+            example: xx_xxxx_xxxx_xxxxxxxxxxxxxxxxxxxxxxxx
         required:
-        - secret
-    User:
-      type: object
-      properties:
-        clerk_user_id:
-          type:
-          - string
-          - 'null'
-          example: user_2tDpMYgevIkZOL76Wo6VzXxsbxD
-        created_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        email:
-          type:
-          - string
-          - 'null'
-          example: lubos@heyapi.dev
-        first_name:
-          type:
-          - string
-          - 'null'
-          example: Lubos
-        id:
-          type: string
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        image_url:
-          type:
-          - string
-          - 'null'
-          example: https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJ0RzFucjNDbzg2azhDTWNoUlBxTHViVEdtTiJ9
-        last_name:
-          type:
-          - string
-          - 'null'
-          example: Menus
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-      required:
-      - clerk_user_id
-      - created_at
-      - email
-      - first_name
-      - id
-      - image_url
-      - last_name
-      - updated_at
-    Role:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        id:
-          type: string
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        organization_id:
-          type: string
-          format: uuid
-          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
-        status:
-          type: string
-          enum:
-          - active
-          - invited
-          - suspended
-          example: active
-        updated_at:
-          type: string
-          format: date-time
-          example: '2025-02-21T02:37:15.840Z'
-        user_id:
-          type: string
-          format: uuid
-          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
-      required:
-      - created_at
-      - id
-      - organization_id
-      - status
-      - updated_at
-      - user_id
+        - value
     CursorResponse:
       type: object
       properties:
@@ -2625,16 +2468,6 @@ components:
       - has_next_page
       - has_previous_page
       - start_cursor
-    ApiKey:
-      allOf:
-      - $ref: '#/components/schemas/ApiKeyConcealed'
-      - type: object
-        properties:
-          value:
-            type: string
-            example: xx_xxxx_xxxx_xxxxxxxxxxxxxxxxxxxxxxxx
-        required:
-        - value
     Specification:
       type: object
       properties:
@@ -2770,6 +2603,40 @@ components:
       - tags
       - version
       - workflow
+    Organization:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        creator_user_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        name:
+          type: string
+          example: Hey API
+        slug:
+          type: string
+          example: hey-api
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+      required:
+      - created_at
+      - creator_user_id
+      - id
+      - name
+      - slug
+      - updated_at
     WebhookConcealed:
       type: object
       properties:
@@ -2808,6 +2675,139 @@ components:
       - id
       - is_enabled
       - project_id
+      - updated_at
+    Webhook:
+      allOf:
+      - $ref: '#/components/schemas/WebhookConcealed'
+      - type: object
+        properties:
+          secret:
+            type: string
+            example: whsec_666a85c7f7ce8c891be0f650b21d0749
+        required:
+        - secret
+    Role:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        organization_id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        status:
+          type: string
+          enum:
+          - active
+          - invited
+          - suspended
+          example: active
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        user_id:
+          type: string
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+      required:
+      - created_at
+      - id
+      - organization_id
+      - status
+      - updated_at
+      - user_id
+    User:
+      type: object
+      properties:
+        clerk_user_id:
+          type:
+          - string
+          - 'null'
+          example: user_2tDpMYgevIkZOL76Wo6VzXxsbxD
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        email:
+          type:
+          - string
+          - 'null'
+          example: lubos@heyapi.dev
+        first_name:
+          type:
+          - string
+          - 'null'
+          example: Lubos
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        image_url:
+          type:
+          - string
+          - 'null'
+          example: https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJ0RzFucjNDbzg2azhDTWNoUlBxTHViVEdtTiJ9
+        last_name:
+          type:
+          - string
+          - 'null'
+          example: Menus
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+      required:
+      - clerk_user_id
+      - created_at
+      - email
+      - first_name
+      - id
+      - image_url
+      - last_name
+      - updated_at
+    ApiKeyConcealed:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        creator_user_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 5d2827a4-b3fc-4946-bb3b-72f23e89c6aa
+        id:
+          type: string
+          format: uuid
+          example: e4ce4324-1177-47ca-aeef-b1d011bd3932
+        last_used_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-21T02:37:15.840Z'
+      required:
+      - created_at
+      - creator_user_id
+      - id
+      - last_used_at
       - updated_at
     Project:
       type: object
