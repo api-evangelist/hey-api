@@ -158,6 +158,47 @@ edges:
     detected: '2026-10-18'
   detected_by: sweep-official-sdks.py
   first_seen: '2026-10-18'
+- partner_name: JSR
+  partner: null
+  partner_match: null
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript, JSR)
+  evidence: https://jsr.io/@hey-api/client-axios
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: JSR (jsr.io public API JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@hey-api/client-axios'
+      version: 0.2.4
+      released: '2024-09-22'
+      released_field: versions.createdAt
+      lapsed: true
+      page: https://jsr.io/@hey-api/client-axios
+      github_repository: https://github.com/hey-api/openapi-ts
+      repo_leg: github-org:hey-api
+      publisher_leg: org:hey-api
+      matched_by: github-org
+    - name: '@hey-api/client-fetch'
+      version: 0.3.1
+      released: '2024-09-22'
+      released_field: versions.createdAt
+      lapsed: true
+      page: https://jsr.io/@hey-api/client-fetch
+      github_repository: https://github.com/hey-api/openapi-ts
+      repo_leg: github-org:hey-api
+      publisher_leg: org:hey-api
+      matched_by: github-org
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months or archived'
+    detected_by: sweep-jsr-javascript-registry.py
+    detected: '2026-10-23'
+  detected_by: sweep-jsr-javascript-registry.py
+  first_seen: '2026-10-23'
 generated: '2026-10-18'
 method: searched
 source:
@@ -176,3 +217,5 @@ checked:
 - https://registry.npmjs.org
 - https://repo1.maven.org/maven2
 - https://rubygems.org/api/v1
+- https://jsr.io/api/packages
+- https://jsr.io/api/scopes

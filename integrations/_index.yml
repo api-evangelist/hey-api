@@ -164,3 +164,44 @@
     detected: '2026-10-18'
   status: not-a-workflow
   arazzo: null
+- slug: hey-api-jsr
+  label: JSR
+  partner_name: JSR
+  category: official SDK (JavaScript/TypeScript, JSR)
+  type: register
+  channel: package-registry
+  evidence: https://jsr.io/@hey-api/client-axios
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: JSR (jsr.io public API JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@hey-api/client-axios'
+      version: 0.2.4
+      released: '2024-09-22'
+      released_field: versions.createdAt
+      lapsed: true
+      page: https://jsr.io/@hey-api/client-axios
+      github_repository: https://github.com/hey-api/openapi-ts
+      repo_leg: github-org:hey-api
+      publisher_leg: org:hey-api
+      matched_by: github-org
+    - name: '@hey-api/client-fetch'
+      version: 0.3.1
+      released: '2024-09-22'
+      released_field: versions.createdAt
+      lapsed: true
+      page: https://jsr.io/@hey-api/client-fetch
+      github_repository: https://github.com/hey-api/openapi-ts
+      repo_leg: github-org:hey-api
+      publisher_leg: org:hey-api
+      matched_by: github-org
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months or archived'
+    detected_by: sweep-jsr-javascript-registry.py
+    detected: '2026-10-23'
+  status: not-a-workflow
+  arazzo: null
