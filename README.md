@@ -1,4 +1,4 @@
-# Hey API (hey-api)
+# Hey API
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,50 +64,145 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Hey API provides @hey-api/openapi-ts, an OpenAPI to TypeScript codegen trusted over 1,000,000 times each month to generate reliable API clients and SDKs. The code is MIT-licensed and free to use, supporting multiple HTTP clients and customization options.
+Hey API builds open-source OpenAPI code generators and a hosted specification registry. @hey-api/openapi-ts turns an OpenAPI document into production-grade TypeScript — SDKs, types, Zod/Valibot/TypeBox validators, TanStack Query and SWR hooks, MSW and Playwright test doubles, and Fastify/NestJS/Hono/Express server handlers — across more than twenty plugins and eight HTTP client runtimes, with a sibling Python generator emitting Pydantic models. It draws over four million npm downloads a week and is used by Vercel, PayPal, AWS, Autodesk and OpenCode. The Hey API Platform (api.heyapi.dev) adds a build-attested registry: CI uploads each OpenAPI document with its repository, branch, commit and workflow provenance, and consumers resolve it back by branch, tag, version or exact commit for reproducible client generation.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/hey-api/refs/heads/main/apis.yml)
+**Areas:** Code Generation · Developer Tools · OpenAPI · SDK · TypeScript · Python · API Design · Specification · Registry · Open Source · SDK Generation
 
-## Scope
+## Hey API on APIs.io
 
-- **Type:** Index 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
+Everything profiled for Hey API is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/hey-api/](https://apis.io/providers/hey-api/)** — or go straight to one of the APIs or properties below.
 
-## Tags:
+### APIs (7)
 
- - Code Generation, TypeScript, OpenAPI, Developer Tools, SDKs
+- [Hey API Openapi-Ts](https://apis.io/apis/hey-api/hey-api/) — @hey-api/openapi-ts is an OpenAPI to TypeScript code generator that emits production-grade SDKs, types, validators, query hooks, mocks and web framework…
+- [Hey API Get API](https://apis.io/apis/hey-api/hey-api-get-api/) — The Get API from Hey API — 1 operation(s) for get.
+- [Hey API Hey API](https://apis.io/apis/hey-api/hey-api-hey-api-api/) — The Hey API API from Hey API — 1 operation(s) for hey api.
+- [Hey API Internal API](https://apis.io/apis/hey-api/hey-api-internal-api/) — The Internal API from Hey API — 3 operation(s) for internal.
+- [Hey API Organizations API](https://apis.io/apis/hey-api/hey-api-organizations-api/) — The Organizations API from Hey API — 13 operation(s) for organizations.
+- [Hey API Specifications API](https://apis.io/apis/hey-api/hey-api-specifications-api/) — The Specifications API from Hey API — 1 operation(s) for specifications.
+- [Hey API Users API](https://apis.io/apis/hey-api/hey-api-users-api/) — The Users API from Hey API — 6 operation(s) for users.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-05-02 
-- **Modified:** 2026-04-28 
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### Hey API openapi-ts
-@hey-api/openapi-ts is an OpenAPI to TypeScript codegen tool that generates reliable API clients and SDKs from OpenAPI specifications. It is MIT-licensed and supports over 1,000,000 monthly downloads.
+Event-driven and webhook contracts.
 
-**Human URL:** [https://heyapi.dev/openapi-ts/get-started](https://heyapi.dev/openapi-ts/get-started)
+- [Hey Api Platform Webhooks](https://apis.io/asyncapis/hey-api/hey-api-platform-webhooks/)
 
+#### Agentic access (1)
 
-#### Tags:
+Which operations an agent can call, which act, and which need a human in the loop.
 
- - Code Generation, TypeScript, OpenAPI
+- [Hey Api Agentic Access](https://apis.io/agentic-access/hey-api/hey-api-agentic-access/)
 
-#### Properties
+#### Collections (6)
 
-- [Documentation](https://heyapi.dev/openapi-ts/get-started)
-- [Getting Started](https://heyapi.dev/openapi-ts/get-started)
+Postman and Open Collection request collections.
 
-## Common Properties
+- [Hey Get API](https://apis.io/collections/hey-api/open-hey-api-get-api/)
+- [Hey Hey API API](https://apis.io/collections/hey-api/open-hey-api-hey-api-api/)
+- [Hey Internal API](https://apis.io/collections/hey-api/open-hey-api-internal-api/)
+- [Hey Organizations API](https://apis.io/collections/hey-api/open-hey-api-organizations-api/)
+- [Hey Specifications API](https://apis.io/collections/hey-api/open-hey-api-specifications-api/)
+- [Hey Users API](https://apis.io/collections/hey-api/open-hey-api-users-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Hey Api Platform Overlay](https://apis.io/overlays/hey-api/hey-api-platform-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Hey Api Authentication](https://apis.io/security/hey-api/hey-api-authentication/)
+- [Hey Api Domain Security](https://apis.io/security/hey-api/hey-api-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Hey Api Plans Pricing](https://apis.io/plans/hey-api/hey-api-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Hey Api Rate Limits](https://apis.io/rate-limits/hey-api/hey-api-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Hey Api Finops](https://apis.io/finops/hey-api/hey-api-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://heyapi.dev/)
 - [Documentation](https://heyapi.dev/openapi-ts/get-started)
-- [GitHub Organization](https://github.com/hey-api)
+- [Getting started](https://heyapi.dev/docs/openapi/typescript/get-started)
+- [API reference](https://heyapi.dev/docs/openapi/typescript/integrations)
+- [Sign up](https://app.heyapi.dev)
+- [Support](https://github.com/orgs/hey-api/discussions)
+- [GitHub](https://github.com/hey-api)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
+**Kin Score 41.5** — developing · rubric 0.25.0 · scored 2026-10-23
 
-**Email:** kin@apievangelist.com
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 50.2 |
+| Contract governance | 4.5 |
+| Operational transparency | 42.1 |
+| Developer ergonomics | 78.0 |
+| Access clarity | 7.9 |
+
+**Agent readiness 32.4** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | yes |
+| Agent Card | — |
+| Dry Run Mode | yes |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/hey-api/](https://apis.io/providers/hey-api/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Hey API: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/hey-api/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
